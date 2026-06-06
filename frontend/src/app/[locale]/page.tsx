@@ -4,8 +4,17 @@ import Services from "@/components/layout/Services";
 import Feedbacks from "@/components/layout/Feedbacks";
 import ContactUs from "@/components/layout/ContactUs";
 import Image from "next/image";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
-export default function Home() {
+export default async function Home({
+  params
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations({ locale, namespace: 'Footer' });
+
   return (
     <main className="mesh-gradient min-h-screen">
       <Hero />
@@ -26,13 +35,13 @@ export default function Home() {
             </div>
             
             <p className="text-white/40 text-sm font-medium">
-              © 2026 Elevate Digital. All rights reserved. Built for Algerian E-commercants.
+              {t('rights')}
             </p>
 
             <div className="flex gap-6">
-              <a href="#" className="text-white/60 hover:text-brand-accent transition-colors">Instagram</a>
-              <a href="#" className="text-white/60 hover:text-brand-accent transition-colors">Facebook</a>
-              <a href="#" className="text-white/60 hover:text-brand-accent transition-colors">TikTok</a>
+              <a href="#" className="text-white/60 hover:text-brand-accent transition-colors">{t('instagram')}</a>
+              <a href="#" className="text-white/60 hover:text-brand-accent transition-colors">{t('facebook')}</a>
+              <a href="#" className="text-white/60 hover:text-brand-accent transition-colors">{t('tiktok')}</a>
             </div>
           </div>
         </div>

@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { 
   LayoutDashboard, 
@@ -30,8 +31,7 @@ export default function Sidebar() {
         <Link href="/" className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-2xl bg-brand-accent p-1">
             <div className="w-full h-full rounded-xl overflow-hidden relative">
-              {/* Using a placeholder for the logo if needed, but we have logo.jpg */}
-              <img src="/logo.jpg" alt="Logo" className="object-cover w-full h-full" />
+              <Image src="/logo.jpg" alt="Logo" fill className="object-cover" />
             </div>
           </div>
           <span className="font-black text-white text-xl tracking-tighter">Elevate</span>

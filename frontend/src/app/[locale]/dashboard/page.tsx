@@ -9,6 +9,7 @@ import {
   TrendingUp,
   ShoppingCart
 } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 const stats = [
   { 
@@ -47,7 +48,7 @@ export default function DashboardOverview() {
       {/* Welcome Header */}
       <div>
         <h1 className="text-4xl font-black text-white mb-2">Hello, Ahmed! 👋</h1>
-        <p className="text-white/60 font-bold">Here's what's happening with your boosts today.</p>
+        <p className="text-white/60 font-bold">Here&apos;s what&apos;s happening with your boosts today.</p>
       </div>
 
       {/* Stats Grid */}
@@ -103,6 +104,3 @@ export default function DashboardOverview() {
     </div>
   );
 }
-
-// I need to import cn
-import { cn } from '@/lib/utils';

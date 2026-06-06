@@ -3,26 +3,29 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Instagram, Facebook, Music2, CheckCircle2 } from 'lucide-react';
-
-const serviceCategories = [
-  {
-    icon: <Instagram className="text-pink-500" size={32} />,
-    name: "Instagram",
-    services: ["Followers", "Likes", "Views", "Comments"]
-  },
-  {
-    icon: <Facebook className="text-blue-600" size={32} />,
-    name: "Facebook",
-    services: ["Page Followers", "Post Likes", "Video Views", "Group Members"]
-  },
-  {
-    icon: <Music2 className="text-black dark:text-white" size={32} />,
-    name: "TikTok",
-    services: ["Followers", "Likes", "Views", "Shares"]
-  }
-];
+import { useTranslations } from 'next-intl';
 
 export default function Services() {
+  const t = useTranslations('Services');
+
+  const serviceCategories = [
+    {
+      icon: <Instagram className="text-pink-500" size={32} />,
+      name: t('instagram'),
+      services: [t('followers'), t('likes'), t('views'), t('comments')]
+    },
+    {
+      icon: <Facebook className="text-blue-600" size={32} />,
+      name: t('facebook'),
+      services: [t('pageFollowers'), t('postLikes'), t('videoViews'), t('groupMembers')]
+    },
+    {
+      icon: <Music2 className="text-black dark:text-white" size={32} />,
+      name: t('tiktok'),
+      services: [t('followers'), t('likes'), t('views'), t('shares')]
+    }
+  ];
+
   return (
     <section id="services" className="py-24 relative overflow-hidden">
       <div className="container mx-auto px-6 relative z-10">
@@ -35,7 +38,7 @@ export default function Services() {
             viewport={{ once: true }}
             className="text-brand-accent font-black tracking-widest uppercase text-xs mb-3"
           >
-            Our Services
+            {t('badge')}
           </motion.h2>
           <motion.h3
             initial={{ opacity: 0, y: 10 }}
@@ -44,7 +47,7 @@ export default function Services() {
             transition={{ delay: 0.1 }}
             className="text-4xl md:text-6xl font-black text-white leading-tight"
           >
-            Everything You Need <br /> To <span className="text-brand-accent">Grow Fast.</span>
+            {t('title')} <br /> <span className="text-brand-accent">{t('growFast')}</span>
           </motion.h3>
         </div>
 
@@ -76,7 +79,7 @@ export default function Services() {
               </ul>
 
               <button className="w-full py-4 rounded-3xl bg-white/10 text-white font-black text-sm hover:bg-white/20 transition-all shadow-xl">
-                View Packages
+                {t('viewPackages')}
               </button>
             </motion.div>
           ))}

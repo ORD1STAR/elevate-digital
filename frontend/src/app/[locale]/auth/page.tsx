@@ -4,9 +4,13 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, Mail, Lock, User, AtSign, Eye, EyeOff } from 'lucide-react';
+import { ArrowLeft, Mail, Lock, User, AtSign, Eye, EyeOff, ArrowRight } from 'lucide-react';
+import { useTranslations, useLocale } from 'next-intl';
 
 export default function AuthPage() {
+  const t = useTranslations('Auth');
+  const locale = useLocale();
+  const isRtl = locale === 'ar';
   const [isLogin, setIsLogin] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
 
@@ -18,10 +22,10 @@ export default function AuthPage() {
       {/* Back to Home */}
       <Link 
         href="/" 
-        className="absolute top-10 left-10 glassy p-4 rounded-full text-white hover:scale-110 transition-all z-20 flex items-center gap-2 font-bold"
+        className="absolute top-10 left-10 rtl:left-auto rtl:right-10 glassy p-4 rounded-full text-white hover:scale-110 transition-all z-20 flex items-center gap-2 font-bold"
       >
-        <ArrowLeft size={20} />
-        <span className="hidden sm:block">Back to Home</span>
+        {isRtl ? <ArrowRight size={20} /> : <ArrowLeft size={20} />}
+        <span className="hidden sm:block">{t('backHome')}</span>
       </Link>
 
       {/* Auth Container Bubble */}
@@ -32,9 +36,9 @@ export default function AuthPage() {
             /* LOGIN FORM */
             <motion.div
               key="login"
-              initial={{ x: -1000, opacity: 0 }}
+              initial={{ x: isRtl ? 1000 : -1000, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
-              exit={{ x: -1000, opacity: 0 }}
+              exit={{ x: isRtl ? 1000 : -1000, opacity: 0 }}
               transition={{ type: 'spring', damping: 20, stiffness: 100 }}
               className="glassy p-10 md:p-16 rounded-[4rem] border border-white/20 shadow-2xl relative overflow-hidden"
             >
@@ -42,27 +46,27 @@ export default function AuthPage() {
                 <div className="w-20 h-20 mx-auto mb-6 p-1 rounded-3xl glassy border border-white/30">
                   <Image src="/logo.jpg" alt="Logo" width={80} height={80} className="rounded-2xl" />
                 </div>
-                <h1 className="text-4xl font-black text-white mb-2">Welcome Back</h1>
-                <p className="text-white/60 font-medium">Log in to your Elevate account</p>
+                <h1 className="text-4xl font-black text-white mb-2">{t('welcomeBack')}</h1>
+                <p className="text-white/60 font-medium">{t('loginSubtitle')}</p>
               </div>
 
               <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
                 <div className="space-y-2">
-                  <label className="text-white/70 font-bold ml-6 text-sm">Email or Username</label>
+                  <label className="text-white/70 font-bold ml-6 rtl:ml-0 rtl:mr-6 text-sm">{t('emailOrUsername')}</label>
                   <div className="relative">
-                    <AtSign className="absolute left-6 top-1/2 -translate-y-1/2 text-white/30 z-10" size={20} />
+                    <AtSign className="absolute left-6 rtl:left-auto rtl:right-6 top-1/2 -translate-y-1/2 text-white/30 z-10" size={20} />
                     <input 
                       type="text" 
                       placeholder="john_doe" 
-                      className="input-bubbly pl-14"
+                      className="input-bubbly pl-14 rtl:pl-6 rtl:pr-14"
                     />
                   </div>
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-white/70 font-bold ml-6 text-sm">Password</label>
+                  <label className="text-white/70 font-bold ml-6 rtl:ml-0 rtl:mr-6 text-sm">{t('password')}</label>
                   <div className="relative">
-                    <Lock className="absolute left-6 top-1/2 -translate-y-1/2 text-white/30 z-10" size={20} />
+                    <Lock className="absolute left-6 rtl:left-auto rtl:right-6 top-1/2 -translate-y-1/2 text-white/30 z-10" size={20} />
                     <input 
                       type={showPassword ? "text" : "password"} 
                       placeholder="••••••••" 
@@ -71,7 +75,7 @@ export default function AuthPage() {
                     <button 
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-6 top-1/2 -translate-y-1/2 text-white/30 hover:text-white transition-colors z-10"
+                      className="absolute right-6 rtl:right-auto rtl:left-6 top-1/2 -translate-y-1/2 text-white/30 hover:text-white transition-colors z-10"
                     >
                       {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                     </button>
@@ -80,23 +84,23 @@ export default function AuthPage() {
 
                 <div className="flex justify-end px-2">
                   <button type="button" className="text-white/50 text-sm font-bold hover:text-brand-accent transition-colors">
-                    Forgot Password?
+                    {t('forgotPassword')}
                   </button>
                 </div>
 
                 <button className="w-full py-5 rounded-full bg-white text-[#063188] font-black text-xl shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all">
-                  Login
+                  {t('login')}
                 </button>
               </form>
 
               <div className="mt-12 text-center pt-8 border-t border-white/10">
                 <p className="text-white/50 font-bold">
-                  New to Elevate? 
+                  {t('newToElevate')} 
                   <button 
                     onClick={toggleAuth}
-                    className="ml-2 text-brand-accent hover:underline decoration-2 underline-offset-4"
+                    className="mx-2 text-brand-accent hover:underline decoration-2 underline-offset-4"
                   >
-                    Create an account
+                    {t('createAccount')}
                   </button>
                 </p>
               </div>
@@ -105,79 +109,79 @@ export default function AuthPage() {
             /* REGISTER FORM */
             <motion.div
               key="register"
-              initial={{ x: 1000, opacity: 0 }}
+              initial={{ x: isRtl ? -1000 : 1000, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
-              exit={{ x: 1000, opacity: 0 }}
+              exit={{ x: isRtl ? -1000 : 1000, opacity: 0 }}
               transition={{ type: 'spring', damping: 20, stiffness: 100 }}
               className="glassy p-10 md:p-16 rounded-[4rem] border border-white/20 shadow-2xl relative overflow-hidden"
             >
               <div className="text-center mb-10">
-                <h1 className="text-4xl font-black text-white mb-2">Join Elevate</h1>
-                <p className="text-white/60 font-medium">Start your growth journey today</p>
+                <h1 className="text-4xl font-black text-white mb-2">{t('joinElevate')}</h1>
+                <p className="text-white/60 font-medium">{t('registerSubtitle')}</p>
               </div>
 
               <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
                 <div className="space-y-2">
-                  <label className="text-white/70 font-bold ml-6 text-sm">Full Name</label>
+                  <label className="text-white/70 font-bold ml-6 rtl:ml-0 rtl:mr-6 text-sm">{t('fullName')}</label>
                   <div className="relative">
-                    <User className="absolute left-6 top-1/2 -translate-y-1/2 text-white/30 z-10" size={20} />
+                    <User className="absolute left-6 rtl:left-auto rtl:right-6 top-1/2 -translate-y-1/2 text-white/30 z-10" size={20} />
                     <input 
                       type="text" 
                       placeholder="John Doe" 
-                      className="input-bubbly pl-14"
+                      className="input-bubbly pl-14 rtl:pl-6 rtl:pr-14"
                     />
                   </div>
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-white/70 font-bold ml-6 text-sm">Email Address</label>
+                  <label className="text-white/70 font-bold ml-6 rtl:ml-0 rtl:mr-6 text-sm">{t('emailAddress')}</label>
                   <div className="relative">
-                    <Mail className="absolute left-6 top-1/2 -translate-y-1/2 text-white/30 z-10" size={20} />
+                    <Mail className="absolute left-6 rtl:left-auto rtl:right-6 top-1/2 -translate-y-1/2 text-white/30 z-10" size={20} />
                     <input 
                       type="email" 
                       placeholder="john@example.com" 
-                      className="input-bubbly pl-14"
+                      className="input-bubbly pl-14 rtl:pl-6 rtl:pr-14"
                     />
                   </div>
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-white/70 font-bold ml-6 text-sm">Username</label>
+                  <label className="text-white/70 font-bold ml-6 rtl:ml-0 rtl:mr-6 text-sm">{t('username')}</label>
                   <div className="relative">
-                    <AtSign className="absolute left-6 top-1/2 -translate-y-1/2 text-white/30 z-10" size={20} />
+                    <AtSign className="absolute left-6 rtl:left-auto rtl:right-6 top-1/2 -translate-y-1/2 text-white/30 z-10" size={20} />
                     <input 
                       type="text" 
                       placeholder="john_doe" 
-                      className="input-bubbly pl-14"
+                      className="input-bubbly pl-14 rtl:pl-6 rtl:pr-14"
                     />
                   </div>
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-white/70 font-bold ml-6 text-sm">Password</label>
+                  <label className="text-white/70 font-bold ml-6 rtl:ml-0 rtl:mr-6 text-sm">{t('password')}</label>
                   <div className="relative">
-                    <Lock className="absolute left-6 top-1/2 -translate-y-1/2 text-white/30 z-10" size={20} />
+                    <Lock className="absolute left-6 rtl:left-auto rtl:right-6 top-1/2 -translate-y-1/2 text-white/30 z-10" size={20} />
                     <input 
                       type={showPassword ? "text" : "password"} 
                       placeholder="••••••••" 
-                      className="input-bubbly pl-14 pr-14"
+                      className="input-bubbly pl-14 rtl:pl-6 rtl:pr-14"
                     />
                   </div>
                 </div>
 
                 <button className="w-full mt-4 py-5 rounded-full bg-brand-accent text-[#063188] font-black text-xl shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all">
-                  Sign Up
+                  {t('signUp')}
                 </button>
               </form>
 
               <div className="mt-10 text-center pt-8 border-t border-white/10">
                 <p className="text-white/50 font-bold">
-                  Already have an account? 
+                  {t('alreadyHaveAccount')} 
                   <button 
                     onClick={toggleAuth}
-                    className="ml-2 text-white hover:underline decoration-2 underline-offset-4"
+                    className="mx-2 text-white hover:underline decoration-2 underline-offset-4"
                   >
-                    Log in
+                    {t('logIn')}
                   </button>
                 </p>
               </div>

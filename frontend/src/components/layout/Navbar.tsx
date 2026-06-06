@@ -1,90 +1,28 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Sun, Moon, Globe, ChevronDown } from 'lucide-react';
+import { Menu, X, Sun, Moon } from 'lucide-react';
 import { cn } from '@/lib/utils';
-
-const navLinks = [
-  { name: 'Home', href: '#home' },
-  { name: 'Who Are We', href: '#who-are-we' },
-  { name: 'Our Experiences', href: '#experiences' },
-  { name: 'Services', href: '#services' },
-  { name: 'Feedbacks', href: '#feedbacks' },
-  { name: 'Contact Us', href: '#contact' },
-];
-
-const languages = [
-  { code: 'EN', name: 'English' },
-  { code: 'FR', name: 'Français' },
-  { code: 'AR', name: 'العربية' },
-];
-
-function LanguageSelector({ currentLang, setLang }: { currentLang: string, setLang: (s: string) => void }) {
-  const [isOpen, setIsOpen] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
-        setIsOpen(false);
-      }
-    };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
-
-  return (
-    <div className="relative" ref={containerRef}>
-      <button 
-        onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 glassy px-4 py-2 rounded-full border border-white/10 text-xs font-black text-white hover:bg-white/10 transition-all"
-      >
-        <Globe size={14} className="text-brand-accent" />
-        <span>{currentLang}</span>
-        <ChevronDown size={14} className={cn("transition-transform", isOpen && "rotate-180")} />
-      </button>
-
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: 10, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 10, scale: 0.95 }}
-            className="absolute top-full mt-2 right-0 w-32 glassy rounded-2xl border border-white/20 p-2 overflow-hidden shadow-2xl z-[60]"
-          >
-            {languages.map((lang) => (
-              <button
-                key={lang.code}
-                onClick={() => {
-                  setLang(lang.code);
-                  setIsOpen(false);
-                }}
-                className={cn(
-                  "w-full text-left px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center justify-between group",
-                  currentLang === lang.code 
-                    ? "bg-white text-[#063188]" 
-                    : "text-white hover:bg-white/10"
-                )}
-              >
-                <span>{lang.code}</span>
-                <span className="opacity-0 group-hover:opacity-50 text-[8px]">{lang.name}</span>
-              </button>
-            ))}
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
-  );
-}
+import { useTranslations } from 'next-intl';
+import LanguageSelector from './LanguageSelector';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [isDark, setIsDark] = useState(false);
-  const [lang, setLang] = useState('EN');
+  const t = useTranslations('Navbar');
+
+  const navLinks = [
+    { name: t('home'), href: '#home' },
+    { name: t('whoAreWe'), href: '#who-are-we' },
+    { name: t('experiences'), href: '#experiences' },
+    { name: t('services'), href: '#services' },
+    { name: t('feedbacks'), href: '#feedbacks' },
+    { name: t('contact'), href: '#contact' },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -143,7 +81,7 @@ export default function Navbar() {
         {/* Actions (Language, Theme, Auth) */}
         <div className="flex items-center gap-2 sm:gap-4">
           <div className="hidden sm:block">
-            <LanguageSelector currentLang={lang} setLang={setLang} />
+            <LanguageSelector />
           </div>
 
           {/* Theme Switcher */}
@@ -168,7 +106,7 @@ export default function Navbar() {
                 : "bg-white text-[#063188] hover:bg-white/90"
             )}
           >
-            Login / Sign In
+            {t('login')}
           </Link>
 
           <button 
@@ -205,18 +143,7 @@ export default function Navbar() {
             
             <div className="flex items-center justify-between pt-4 border-t border-white/10">
               <div className="flex gap-2">
-                {languages.map((l) => (
-                  <button 
-                    key={l.code}
-                    onClick={() => setLang(l.code)}
-                    className={cn(
-                      "text-xs font-black px-4 py-2 rounded-full glassy border border-white/10", 
-                      lang === l.code ? "bg-white text-[#063188]" : "text-white"
-                    )}
-                  >
-                    {l.code}
-                  </button>
-                ))}
+                <LanguageSelector />
               </div>
             </div>
 
@@ -225,7 +152,7 @@ export default function Navbar() {
               onClick={() => setIsOpen(false)}
               className="text-center px-6 py-4 rounded-full bg-white text-[#063188] font-black text-lg shadow-xl"
             >
-              Login / Sign In
+              {t('login')}
             </Link>
           </motion.div>
         )}

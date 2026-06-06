@@ -1,0 +1,125 @@
+{
+  "Navbar": {
+    "home": "Accueil",
+    "whoAreWe": "Qui Sommes-Nous",
+    "experiences": "Nos Expériences",
+    "services": "Services",
+    "feedbacks": "Avis Clients",
+    "contact": "Contactez-nous",
+    "login": "Connexion / Inscription"
+  },
+  "Hero": {
+    "badge": "Le #1 du SMM en Algérie",
+    "title": "Élevez Votre",
+    "subtitle": "Présence Digitale",
+    "description": "Transformez votre portée en ligne avec des boosts premium. Conçu pour les e-commerçants algériens qui exigent qualité et rapidité.",
+    "explore": "Explorer les Services",
+    "learnMore": "En savoir plus",
+    "fastDelivery": "Livraison Rapide",
+    "safeSecure": "Sûr & Sécurisé",
+    "support": "Support 24/7"
+  },
+  "WhoAreWe": {
+    "badge": "Qui Sommes-Nous ?",
+    "title": "Propulser l'E-commerce Algérien",
+    "since": "Depuis le Premier Jour.",
+    "description": "Chez Elevate Digital, nous comprenons les défis uniques du marché numérique algérien. Notre mission est de fournir aux entreprises locales les mêmes outils de pointe utilisés par les marques mondiales.",
+    "happyClients": "Clients Satisfaits",
+    "servicesDelivered": "Services Livrés",
+    "fastTitle": "Livraison Rapide",
+    "fastDesc": "La plupart des commandes commencent en quelques minutes. Nous privilégions la rapidité sans compromettre la qualité.",
+    "secureTitle": "Sûr & Privé",
+    "secureDesc": "La sécurité de votre compte est notre priorité. Nous ne demandons jamais votre mot de passe.",
+    "qualityTitle": "Résultats Qualitatifs",
+    "qualityDesc": "Des boosts à haute rétention qui paraissent naturels et vous aident à atteindre vos objectifs."
+  },
+  "Services": {
+    "badge": "Nos Services",
+    "title": "Tout ce qu'il vous faut",
+    "growFast": "Pour Grandir Vite.",
+    "viewPackages": "Voir les Packs",
+    "instagram": "Instagram",
+    "facebook": "Facebook",
+    "tiktok": "TikTok",
+    "followers": "Abonnés",
+    "likes": "J'aime",
+    "views": "Vues",
+    "comments": "Commentaires",
+    "pageFollowers": "Abonnés Page",
+    "postLikes": "Likes Publication",
+    "videoViews": "Vues Vidéo",
+    "groupMembers": "Membres Groupe",
+    "shares": "Partages"
+  },
+  "Feedbacks": {
+    "badge": "Avis Clients",
+    "title": "Ce que disent",
+    "customersSay": "Nos Clients.",
+    "roleOwner": "E-commerçant",
+    "roleCreator": "Créateur de Contenu",
+    "roleDropshipper": "Dropshipper",
+    "items": {
+      "1": {
+        "name": "Ahmed Bensalah",
+        "content": "Elevate Digital a transformé ma page Instagram. Les abonnés sont de haute qualité et cela a vraiment aidé ma preuve sociale !"
+      },
+      "2": {
+        "name": "Sara Mahdi",
+        "content": "Livraison rapide et excellent support. J'utilise leur service de likes TikTok depuis des mois maintenant."
+      },
+      "3": {
+        "name": "Yacine Kheris",
+        "content": "Le meilleur panel SMM en Algérie. Tableau de bord facile à utiliser et services très fiables."
+      }
+    }
+  },
+  "Contact": {
+    "badge": "Contactez-nous",
+    "title": "Parlons de",
+    "aboutGrowth": "Votre Croissance.",
+    "emailUs": "Email",
+    "callUs": "Téléphone",
+    "visitUs": "Localisation",
+    "fullName": "Nom Complet",
+    "emailAddress": "Adresse Email",
+    "subject": "Sujet",
+    "message": "Votre Message",
+    "placeholderName": "Ahmed Bensalah",
+    "placeholderEmail": "ahmed@example.com",
+    "placeholderMessage": "Parlez-nous de votre projet...",
+    "send": "Envoyer le Message",
+    "subjects": {
+      "general": "Demande Générale",
+      "instagram": "Boost Instagram",
+      "tiktok": "Boost TikTok",
+      "facebook": "Boost Facebook",
+      "partnership": "Partenariat",
+      "other": "Autre"
+    }
+  },
+  "Auth": {
+    "backHome": "Retour à l'accueil",
+    "welcomeBack": "Bon retour",
+    "loginSubtitle": "Connectez-vous à votre compte Elevate",
+    "emailOrUsername": "Email ou Nom d'utilisateur",
+    "password": "Mot de passe",
+    "forgotPassword": "Mot de passe oublié ?",
+    "login": "Connexion",
+    "newToElevate": "Nouveau sur Elevate ?",
+    "createAccount": "Créer un compte",
+    "joinElevate": "Rejoindre Elevate",
+    "registerSubtitle": "Commencez votre croissance dès aujourd'hui",
+    "fullName": "Nom Complet",
+    "emailAddress": "Adresse Email",
+    "username": "Nom d'utilisateur",
+    "signUp": "S'inscrire",
+    "alreadyHaveAccount": "Vous avez déjà un compte ?",
+    "logIn": "Se connecter"
+  },
+  "Footer": {
+    "rights": "© 2026 Elevate Digital. Tous droits réservés. Conçu pour les e-commerçants algériens.",
+    "instagram": "Instagram",
+    "facebook": "Facebook",
+    "tiktok": "TikTok"
+  }
+}

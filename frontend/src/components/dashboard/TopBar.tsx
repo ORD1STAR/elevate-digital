@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import { Bell, Search, ChevronDown } from 'lucide-react';
 
 export default function TopBar() {
@@ -27,7 +28,13 @@ export default function TopBar() {
         <div className="glassy pl-3 pr-6 py-2 rounded-full border border-white/10 flex items-center gap-4 hover:bg-white/10 transition-all cursor-pointer group">
           <div className="w-10 h-10 rounded-full bg-brand-accent p-0.5 shadow-xl">
             <div className="w-full h-full rounded-full bg-white overflow-hidden relative">
-              <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Hanno" alt="User" className="object-cover w-full h-full" />
+              <Image 
+                src="https://api.dicebear.com/7.x/avataaars/svg?seed=Hanno" 
+                alt="User" 
+                fill 
+                className="object-cover" 
+                unoptimized
+              />
             </div>
           </div>
           <div className="hidden sm:block">

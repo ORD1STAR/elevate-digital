@@ -36,7 +36,7 @@ export default function BubblySelect({ options, value, onChange, placeholder }: 
           isOpen && "scale-[1.02] bg-white/15 border-white/30 shadow-2xl"
         )}
       >
-        <span className={cn(!value && "text-white/30")}>
+        <span className={cn("flex-1 text-left rtl:text-right", !value && "text-white/30")}>
           {value || placeholder}
         </span>
         <ChevronDown 
@@ -63,7 +63,7 @@ export default function BubblySelect({ options, value, onChange, placeholder }: 
                     setIsOpen(false);
                   }}
                   className={cn(
-                    "w-full text-left px-6 py-4 rounded-2xl text-sm font-bold transition-all",
+                    "w-full text-left rtl:text-right px-6 py-4 rounded-2xl text-sm font-bold transition-all",
                     value === option 
                       ? "bg-white text-[#063188]" 
                       : "text-white hover:bg-white/10"

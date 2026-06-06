@@ -4,8 +4,11 @@ import React from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { ArrowRight, Sparkles } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 export default function Hero() {
+  const t = useTranslations('Hero');
+
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center pt-32 pb-20 overflow-hidden mesh-gradient">
       {/* Decorative Elements */}
@@ -32,7 +35,7 @@ export default function Hero() {
             className="mb-8 px-5 py-2 rounded-full glassy border border-white/20 inline-flex items-center gap-2 text-white text-sm font-semibold shadow-2xl"
           >
             <Sparkles size={16} className="text-brand-accent" />
-            <span>The #1 Social Media Booster in Algeria</span>
+            <span>{t('badge')}</span>
           </motion.div>
 
           {/* Logo with Glow */}
@@ -60,8 +63,8 @@ export default function Hero() {
             transition={{ delay: 0.1 }}
             className="text-5xl md:text-8xl font-black text-white mb-8 leading-[1.1] tracking-tighter"
           >
-            Elevate Your <br />
-            <span className="text-brand-accent drop-shadow-sm">Digital Presence</span>
+            {t('title')} <br />
+            <span className="text-brand-accent drop-shadow-sm">{t('subtitle')}</span>
           </motion.h1>
 
           {/* Subtitle */}
@@ -71,8 +74,7 @@ export default function Hero() {
             transition={{ delay: 0.2 }}
             className="text-lg md:text-2xl text-white/80 max-w-3xl mx-auto mb-12 font-medium leading-relaxed"
           >
-            Transform your online reach with premium social media boosts. 
-            Tailored for <span className="text-white font-bold underline decoration-brand-accent underline-offset-4">Algerian E-commercants</span> who demand quality and speed.
+            {t('description')}
           </motion.p>
 
           {/* Actions */}
@@ -82,14 +84,14 @@ export default function Hero() {
             transition={{ delay: 0.3 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-6 w-full"
           >
-            <button className="group relative w-full sm:w-auto px-10 py-5 rounded-full bg-white text-[#063188] font-black text-xl shadow-2xl transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-2 overflow-hidden">
-              <span className="relative z-10">Explore Services</span>
-              <ArrowRight size={20} className="relative z-10 group-hover:translate-x-1 transition-transform" />
+            <button className="group relative w-full sm:w-auto px-10 py-5 rounded-full bg-white text-[#063188] font-black text-xl shadow-xl transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-2 overflow-hidden">
+              <span className="relative z-10">{t('explore')}</span>
+              <ArrowRight size={20} className="relative z-10 group-hover:translate-x-1 transition-transform rtl:rotate-180 rtl:group-hover:-translate-x-1" />
               <div className="absolute inset-0 bg-brand-accent/10 opacity-0 group-hover:opacity-100 transition-opacity" />
             </button>
             
             <button className="w-full sm:w-auto px-10 py-5 rounded-full glassy text-white font-bold text-xl border border-white/30 hover:bg-white/10 transition-all hover:scale-105 active:scale-95 shadow-xl">
-              Learn More
+              {t('learnMore')}
             </button>
           </motion.div>
 
@@ -102,15 +104,15 @@ export default function Hero() {
           >
             <div className="flex items-center gap-2 text-white font-bold">
               <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">✓</div>
-              <span>Fast Delivery</span>
+              <span>{t('fastDelivery')}</span>
             </div>
             <div className="flex items-center gap-2 text-white font-bold">
               <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">✓</div>
-              <span>Safe & Secure</span>
+              <span>{t('safeSecure')}</span>
             </div>
             <div className="flex items-center gap-2 text-white font-bold">
               <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">✓</div>
-              <span>24/7 Support</span>
+              <span>{t('support')}</span>
             </div>
           </motion.div>
         </div>

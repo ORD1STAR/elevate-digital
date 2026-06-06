@@ -1,0 +1,125 @@
+{
+  "Navbar": {
+    "home": "Home",
+    "whoAreWe": "Who Are We",
+    "experiences": "Our Experiences",
+    "services": "Services",
+    "feedbacks": "Feedbacks",
+    "contact": "Contact Us",
+    "login": "Login / Sign In"
+  },
+  "Hero": {
+    "badge": "The #1 Social Media Booster in Algeria",
+    "title": "Elevate Your",
+    "subtitle": "Digital Presence",
+    "description": "Transform your online reach with premium social media boosts. Tailored for Algerian E-commercants who demand quality and speed.",
+    "explore": "Explore Services",
+    "learnMore": "Learn More",
+    "fastDelivery": "Fast Delivery",
+    "safeSecure": "Safe & Secure",
+    "support": "24/7 Support"
+  },
+  "WhoAreWe": {
+    "badge": "Who Are We?",
+    "title": "Empowering Algerian E-commerce",
+    "since": "Since Day One.",
+    "description": "At Elevate Digital, we understand the unique challenges of the Algerian digital market. Our mission is to provide local businesses with the same high-end social media tools used by global brands, helping you stand out in a crowded marketplace.",
+    "happyClients": "Happy Clients",
+    "servicesDelivered": "Services Delivered",
+    "fastTitle": "Fast Delivery",
+    "fastDesc": "Most orders start within minutes. We prioritize speed without compromising quality.",
+    "secureTitle": "Secure & Private",
+    "secureDesc": "Your account safety is our priority. We never ask for your password or sensitive data.",
+    "qualityTitle": "Quality Results",
+    "qualityDesc": "High-retention boosts that look natural and help you reach your growth targets."
+  },
+  "Services": {
+    "badge": "Our Services",
+    "title": "Everything You Need",
+    "growFast": "To Grow Fast.",
+    "viewPackages": "View Packages",
+    "instagram": "Instagram",
+    "facebook": "Facebook",
+    "tiktok": "TikTok",
+    "followers": "Followers",
+    "likes": "Likes",
+    "views": "Views",
+    "comments": "Comments",
+    "pageFollowers": "Page Followers",
+    "postLikes": "Post Likes",
+    "videoViews": "Video Views",
+    "groupMembers": "Group Members",
+    "shares": "Shares"
+  },
+  "Feedbacks": {
+    "badge": "Feedbacks",
+    "title": "What Our",
+    "customersSay": "Customers Say.",
+    "roleOwner": "E-commerce Owner",
+    "roleCreator": "Content Creator",
+    "roleDropshipper": "Dropshipper",
+    "items": {
+      "1": {
+        "name": "Ahmed Bensalah",
+        "content": "Elevate Digital transformed my Instagram page. The followers were high quality and it really helped my social proof!"
+      },
+      "2": {
+        "name": "Sara Mahdi",
+        "content": "Fast delivery and great support. I've been using their TikTok likes service for months now."
+      },
+      "3": {
+        "name": "Yacine Kheris",
+        "content": "The best SMM panel in Algeria. Easy to use dashboard and very reliable services."
+      }
+    }
+  },
+  "Contact": {
+    "badge": "Contact Us",
+    "title": "Let's Talk",
+    "aboutGrowth": "About Your Growth.",
+    "emailUs": "Email Us",
+    "callUs": "Call Us",
+    "visitUs": "Visit Us",
+    "fullName": "Full Name",
+    "emailAddress": "Email Address",
+    "subject": "Subject",
+    "message": "Your Message",
+    "placeholderName": "John Doe",
+    "placeholderEmail": "john@example.com",
+    "placeholderMessage": "Tell us about your project...",
+    "send": "Send Message",
+    "subjects": {
+      "general": "General Inquiry",
+      "instagram": "Instagram Boost",
+      "tiktok": "TikTok Boost",
+      "facebook": "Facebook Boost",
+      "partnership": "Partnership",
+      "other": "Other"
+    }
+  },
+  "Auth": {
+    "backHome": "Back to Home",
+    "welcomeBack": "Welcome Back",
+    "loginSubtitle": "Log in to your Elevate account",
+    "emailOrUsername": "Email or Username",
+    "password": "Password",
+    "forgotPassword": "Forgot Password?",
+    "login": "Login",
+    "newToElevate": "New to Elevate?",
+    "createAccount": "Create an account",
+    "joinElevate": "Join Elevate",
+    "registerSubtitle": "Start your growth journey today",
+    "fullName": "Full Name",
+    "emailAddress": "Email Address",
+    "username": "Username",
+    "signUp": "Sign Up",
+    "alreadyHaveAccount": "Already have an account?",
+    "logIn": "Log in"
+  },
+  "Footer": {
+    "rights": "© 2026 Elevate Digital. All rights reserved. Built for Algerian E-commercants.",
+    "instagram": "Instagram",
+    "facebook": "Facebook",
+    "tiktok": "TikTok"
+  }
+}

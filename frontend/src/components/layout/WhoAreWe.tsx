@@ -3,26 +3,29 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Shield, Target, Zap } from 'lucide-react';
-
-const features = [
-  {
-    icon: <Zap className="text-brand-accent" size={32} />,
-    title: "Fast Delivery",
-    description: "Most orders start within minutes. We prioritize speed without compromising quality."
-  },
-  {
-    icon: <Shield className="text-brand-accent" size={32} />,
-    title: "Secure & Private",
-    description: "Your account safety is our priority. We never ask for your password or sensitive data."
-  },
-  {
-    icon: <Target className="text-brand-accent" size={32} />,
-    title: "Quality Results",
-    description: "High-retention boosts that look natural and help you reach your growth targets."
-  }
-];
+import { useTranslations } from 'next-intl';
 
 export default function WhoAreWe() {
+  const t = useTranslations('WhoAreWe');
+
+  const features = [
+    {
+      icon: <Zap className="text-brand-accent" size={32} />,
+      title: t('fastTitle'),
+      description: t('fastDesc')
+    },
+    {
+      icon: <Shield className="text-brand-accent" size={32} />,
+      title: t('secureTitle'),
+      description: t('secureDesc')
+    },
+    {
+      icon: <Target className="text-brand-accent" size={32} />,
+      title: t('qualityTitle'),
+      description: t('qualityDesc')
+    }
+  ];
+
   return (
     <section id="who-are-we" className="py-24 bg-white/5 relative overflow-hidden">
       <div className="container mx-auto px-6 relative z-10">
@@ -36,24 +39,22 @@ export default function WhoAreWe() {
               viewport={{ once: true }}
               className="space-y-6"
             >
-              <h2 className="text-brand-accent font-black tracking-widest uppercase text-sm">Who Are We?</h2>
+              <h2 className="text-brand-accent font-black tracking-widest uppercase text-sm">{t('badge')}</h2>
               <h3 className="text-4xl md:text-5xl font-black text-white leading-tight">
-                Empowering Algerian E-commerce <span className="text-brand-accent">Since Day One.</span>
+                {t('title')} <span className="text-brand-accent">{t('since')}</span>
               </h3>
               <p className="text-lg text-white/70 leading-relaxed font-medium">
-                At Elevate Digital, we understand the unique challenges of the Algerian digital market. 
-                Our mission is to provide local businesses with the same high-end social media tools 
-                used by global brands, helping you stand out in a crowded marketplace.
+                {t('description')}
               </p>
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 pt-6">
                 <div className="space-y-2">
                   <h4 className="text-2xl font-bold text-white">500+</h4>
-                  <p className="text-white/60 font-medium text-sm italic">Happy Clients</p>
+                  <p className="text-white/60 font-medium text-sm italic">{t('happyClients')}</p>
                 </div>
                 <div className="space-y-2">
                   <h4 className="text-2xl font-bold text-white">1M+</h4>
-                  <p className="text-white/60 font-medium text-sm italic">Services Delivered</p>
+                  <p className="text-white/60 font-medium text-sm italic">{t('servicesDelivered')}</p>
                 </div>
               </div>
             </motion.div>

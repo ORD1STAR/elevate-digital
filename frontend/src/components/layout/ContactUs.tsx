@@ -3,18 +3,20 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import BubblySelect from '../ui/BubblySelect';
 
 export default function ContactUs() {
-  const [subject, setSubject] = useState('General Inquiry');
+  const t = useTranslations('Contact');
+  const [subject, setSubject] = useState(t('subjects.general'));
   
   const subjects = [
-    'General Inquiry',
-    'Instagram Boost',
-    'TikTok Boost',
-    'Facebook Boost',
-    'Partnership',
-    'Other'
+    t('subjects.general'),
+    t('subjects.instagram'),
+    t('subjects.tiktok'),
+    t('subjects.facebook'),
+    t('subjects.partnership'),
+    t('subjects.other')
   ];
 
   return (
@@ -30,9 +32,9 @@ export default function ContactUs() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-brand-accent font-black tracking-widest uppercase text-sm mb-4">Contact Us</h2>
+              <h2 className="text-brand-accent font-black tracking-widest uppercase text-sm mb-4">{t('badge')}</h2>
               <h3 className="text-4xl md:text-5xl font-black text-white leading-tight">
-                Let's Talk <br /> About Your <span className="text-brand-accent">Growth.</span>
+                {t('title')} <br /> {t('aboutGrowth')}
               </h3>
             </motion.div>
 
@@ -42,7 +44,7 @@ export default function ContactUs() {
                   <Mail size={24} />
                 </div>
                 <div>
-                  <p className="text-white/50 text-sm font-bold uppercase tracking-wider">Email Us</p>
+                  <p className="text-white/50 text-sm font-bold uppercase tracking-wider">{t('emailUs')}</p>
                   <p className="text-white text-lg font-bold">contact@elevate-digital.dz</p>
                 </div>
               </div>
@@ -52,7 +54,7 @@ export default function ContactUs() {
                   <Phone size={24} />
                 </div>
                 <div>
-                  <p className="text-white/50 text-sm font-bold uppercase tracking-wider">Call Us</p>
+                  <p className="text-white/50 text-sm font-bold uppercase tracking-wider">{t('callUs')}</p>
                   <p className="text-white text-lg font-bold">+213 (0) 555 12 34 56</p>
                 </div>
               </div>
@@ -62,7 +64,7 @@ export default function ContactUs() {
                   <MapPin size={24} />
                 </div>
                 <div>
-                  <p className="text-white/50 text-sm font-bold uppercase tracking-wider">Visit Us</p>
+                  <p className="text-white/50 text-sm font-bold uppercase tracking-wider">{t('visitUs')}</p>
                   <p className="text-white text-lg font-bold">Algiers, Algeria</p>
                 </div>
               </div>
@@ -80,25 +82,25 @@ export default function ContactUs() {
               <form className="space-y-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="space-y-3">
-                    <label className="text-white/80 font-bold ml-4 text-sm">Full Name</label>
+                    <label className="text-white/80 font-bold ml-4 rtl:ml-0 rtl:mr-4 text-sm">{t('fullName')}</label>
                     <input 
                       type="text" 
-                      placeholder="John Doe" 
+                      placeholder={t('placeholderName')} 
                       className="input-bubbly"
                     />
                   </div>
                   <div className="space-y-3">
-                    <label className="text-white/80 font-bold ml-4 text-sm">Email Address</label>
+                    <label className="text-white/80 font-bold ml-4 rtl:ml-0 rtl:mr-4 text-sm">{t('emailAddress')}</label>
                     <input 
                       type="email" 
-                      placeholder="john@example.com" 
+                      placeholder={t('placeholderEmail')} 
                       className="input-bubbly"
                     />
                   </div>
                 </div>
 
                 <div className="space-y-3">
-                  <label className="text-white/80 font-bold ml-4 text-sm">Subject</label>
+                  <label className="text-white/80 font-bold ml-4 rtl:ml-0 rtl:mr-4 text-sm">{t('subject')}</label>
                   <BubblySelect 
                     options={subjects}
                     value={subject}
@@ -107,17 +109,17 @@ export default function ContactUs() {
                 </div>
 
                 <div className="space-y-3">
-                  <label className="text-white/80 font-bold ml-4 text-sm">Your Message</label>
+                  <label className="text-white/80 font-bold ml-4 rtl:ml-0 rtl:mr-4 text-sm">{t('message')}</label>
                   <textarea 
                     rows={4} 
-                    placeholder="Tell us about your project..." 
+                    placeholder={t('placeholderMessage')} 
                     className="input-bubbly rounded-[2rem] resize-none"
                   ></textarea>
                 </div>
 
                 <button className="w-full py-5 rounded-full bg-brand-accent text-[#063188] font-black text-xl shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-3">
-                  <span>Send Message</span>
-                  <Send size={20} />
+                  <span>{t('send')}</span>
+                  <Send size={20} className="rtl:rotate-180" />
                 </button>
               </form>
             </motion.div>
