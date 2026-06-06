@@ -6,17 +6,17 @@ import { Instagram, Facebook, Music2, CheckCircle2 } from 'lucide-react';
 
 const serviceCategories = [
   {
-    icon: <Instagram className="text-pink-500" size={40} />,
+    icon: <Instagram className="text-pink-500" size={32} />,
     name: "Instagram",
     services: ["Followers", "Likes", "Views", "Comments"]
   },
   {
-    icon: <Facebook className="text-blue-600" size={40} />,
+    icon: <Facebook className="text-blue-600" size={32} />,
     name: "Facebook",
     services: ["Page Followers", "Post Likes", "Video Views", "Group Members"]
   },
   {
-    icon: <Music2 className="text-black dark:text-white" size={40} />,
+    icon: <Music2 className="text-black dark:text-white" size={32} />,
     name: "TikTok",
     services: ["Followers", "Likes", "Views", "Shares"]
   }
@@ -28,17 +28,17 @@ export default function Services() {
       <div className="container mx-auto px-6 relative z-10">
         
         {/* Header */}
-        <div className="text-center mb-20">
+        <div className="text-center mb-16">
           <motion.h2
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-brand-accent font-black tracking-widest uppercase text-sm mb-4"
+            className="text-brand-accent font-black tracking-widest uppercase text-xs mb-3"
           >
             Our Services
           </motion.h2>
           <motion.h3
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
@@ -49,29 +49,33 @@ export default function Services() {
         </div>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
           {serviceCategories.map((category, index) => (
             <motion.div
               key={category.name}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="glassy p-10 rounded-[3rem] border border-white/10 flex flex-col items-center text-center group hover:bg-white/20 transition-all"
+              className="glassy p-10 rounded-[3rem] border border-white/10 flex flex-col items-center group transition-all hover:translate-y-[-5px]"
             >
-              <div className="mb-8 p-6 rounded-full bg-white/10 group-hover:scale-110 transition-transform shadow-2xl">
+              {/* Central Icon */}
+              <div className="mb-8 w-16 h-16 rounded-full glassy flex items-center justify-center shadow-inner group-hover:scale-110 transition-transform">
                 {category.icon}
               </div>
-              <h4 className="text-3xl font-black text-white mb-6">{category.name}</h4>
-              <ul className="space-y-4 w-full">
+
+              <h4 className="text-2xl font-black text-white mb-8">{category.name}</h4>
+              
+              <ul className="space-y-4 mb-12 flex-1">
                 {category.services.map((service) => (
-                  <li key={service} className="flex items-center gap-3 text-white/70 font-semibold justify-center">
-                    <CheckCircle2 size={18} className="text-brand-accent" />
+                  <li key={service} className="flex items-center gap-3 text-white/60 font-bold justify-center text-sm">
+                    <CheckCircle2 size={16} className="text-brand-accent opacity-50" />
                     <span>{service}</span>
                   </li>
                 ))}
               </ul>
-              <button className="mt-10 w-full py-4 rounded-full bg-white/10 text-white font-bold hover:bg-brand-accent hover:text-[#063188] transition-all">
+
+              <button className="w-full py-4 rounded-3xl bg-white/10 text-white font-black text-sm hover:bg-white/20 transition-all shadow-xl">
                 View Packages
               </button>
             </motion.div>

@@ -63,31 +63,31 @@ export default function ContactUs() {
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              className="glassy p-8 md:p-12 rounded-[3rem] border border-white/10"
+              className="glassy bg-white/10 dark:bg-black/40 p-8 md:p-12 rounded-[3rem] border border-white/20 shadow-2xl"
             >
               <form className="space-y-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="space-y-3">
-                    <label className="text-white/70 font-bold ml-4">Full Name</label>
+                    <label className="text-white/80 font-bold ml-4">Full Name</label>
                     <input 
                       type="text" 
                       placeholder="John Doe" 
-                      className="w-full px-8 py-4 rounded-full bg-white/5 border border-white/10 text-white focus:border-brand-accent focus:bg-white/10 outline-none transition-all placeholder:text-white/20"
+                      className="w-full px-8 py-4 rounded-full bg-white/5 border border-white/20 text-white focus:border-brand-accent focus:bg-white/10 outline-none transition-all placeholder:text-white/30 font-semibold"
                     />
                   </div>
                   <div className="space-y-3">
-                    <label className="text-white/70 font-bold ml-4">Email Address</label>
+                    <label className="text-white/80 font-bold ml-4">Email Address</label>
                     <input 
                       type="email" 
                       placeholder="john@example.com" 
-                      className="w-full px-8 py-4 rounded-full bg-white/5 border border-white/10 text-white focus:border-brand-accent focus:bg-white/10 outline-none transition-all placeholder:text-white/20"
+                      className="w-full px-8 py-4 rounded-full bg-white/5 border border-white/20 text-white focus:border-brand-accent focus:bg-white/10 outline-none transition-all placeholder:text-white/30 font-semibold"
                     />
                   </div>
                 </div>
 
                 <div className="space-y-3">
-                  <label className="text-white/70 font-bold ml-4">Subject</label>
-                  <select className="w-full px-8 py-4 rounded-full bg-white/5 border border-white/10 text-white focus:border-brand-accent focus:bg-white/10 outline-none transition-all appearance-none">
+                  <label className="text-white/80 font-bold ml-4">Subject</label>
+                  <select className="w-full px-8 py-4 rounded-full bg-white/5 border border-white/20 text-white focus:border-brand-accent focus:bg-white/10 outline-none transition-all appearance-none font-semibold">
                     <option className="bg-[#1b3069]">General Inquiry</option>
                     <option className="bg-[#1b3069]">Instagram Boost</option>
                     <option className="bg-[#1b3069]">TikTok Boost</option>
@@ -96,15 +96,15 @@ export default function ContactUs() {
                 </div>
 
                 <div className="space-y-3">
-                  <label className="text-white/70 font-bold ml-4">Your Message</label>
+                  <label className="text-white/80 font-bold ml-4">Your Message</label>
                   <textarea 
                     rows={4} 
                     placeholder="Tell us about your project..." 
-                    className="w-full px-8 py-6 rounded-[2rem] bg-white/5 border border-white/10 text-white focus:border-brand-accent focus:bg-white/10 outline-none transition-all placeholder:text-white/20 resize-none"
+                    className="w-full px-8 py-6 rounded-[2rem] bg-white/5 border border-white/20 text-white focus:border-brand-accent focus:bg-white/10 outline-none transition-all placeholder:text-white/30 resize-none font-semibold"
                   ></textarea>
                 </div>
 
-                <button className="w-full py-5 rounded-full bg-brand-accent text-[#063188] font-black text-xl shadow-2xl hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-3">
+                <button className="w-full py-5 rounded-full bg-brand-accent text-[#063188] font-black text-xl shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-3">
                   <span>Send Message</span>
                   <Send size={20} />
                 </button>
