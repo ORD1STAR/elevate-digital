@@ -1,10 +1,22 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import BubblySelect from '../ui/BubblySelect';
 
 export default function ContactUs() {
+  const [subject, setSubject] = useState('General Inquiry');
+  
+  const subjects = [
+    'General Inquiry',
+    'Instagram Boost',
+    'TikTok Boost',
+    'Facebook Boost',
+    'Partnership',
+    'Other'
+  ];
+
   return (
     <section id="contact" className="py-24 relative overflow-hidden">
       <div className="container mx-auto px-6 relative z-10">
@@ -68,7 +80,7 @@ export default function ContactUs() {
               <form className="space-y-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="space-y-3">
-                    <label className="text-white/80 font-bold ml-4">Full Name</label>
+                    <label className="text-white/80 font-bold ml-4 text-sm">Full Name</label>
                     <input 
                       type="text" 
                       placeholder="John Doe" 
@@ -76,7 +88,7 @@ export default function ContactUs() {
                     />
                   </div>
                   <div className="space-y-3">
-                    <label className="text-white/80 font-bold ml-4">Email Address</label>
+                    <label className="text-white/80 font-bold ml-4 text-sm">Email Address</label>
                     <input 
                       type="email" 
                       placeholder="john@example.com" 
@@ -86,17 +98,16 @@ export default function ContactUs() {
                 </div>
 
                 <div className="space-y-3">
-                  <label className="text-white/80 font-bold ml-4">Subject</label>
-                  <select className="input-bubbly appearance-none">
-                    <option className="bg-[#1b3069]">General Inquiry</option>
-                    <option className="bg-[#1b3069]">Instagram Boost</option>
-                    <option className="bg-[#1b3069]">TikTok Boost</option>
-                    <option className="bg-[#1b3069]">Partnership</option>
-                  </select>
+                  <label className="text-white/80 font-bold ml-4 text-sm">Subject</label>
+                  <BubblySelect 
+                    options={subjects}
+                    value={subject}
+                    onChange={setSubject}
+                  />
                 </div>
 
                 <div className="space-y-3">
-                  <label className="text-white/80 font-bold ml-4">Your Message</label>
+                  <label className="text-white/80 font-bold ml-4 text-sm">Your Message</label>
                   <textarea 
                     rows={4} 
                     placeholder="Tell us about your project..." 
