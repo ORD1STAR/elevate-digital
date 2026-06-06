@@ -49,7 +49,7 @@ export default function Feedbacks() {
               className="text-4xl md:text-5xl font-black text-white leading-tight"
             >
               What Our <span className="text-brand-accent">Customers Say.</span>
-            </h3>
+            </motion.h3>
           </div>
           <div className="flex gap-2">
             {[1, 2, 3, 4, 5].map((s) => (
