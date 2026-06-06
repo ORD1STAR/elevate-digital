@@ -28,6 +28,7 @@ export default function ThemeSelector({ scrolled }: { scrolled?: boolean }) {
   }, []);
 
   const currentTheme = themes.find(t => t.id === theme) || themes[0];
+  const isLight = theme === 'light';
 
   return (
     <div className="relative" ref={containerRef}>
@@ -35,9 +36,11 @@ export default function ThemeSelector({ scrolled }: { scrolled?: boolean }) {
         onClick={() => setIsOpen(!isOpen)}
         className={cn(
           "flex items-center gap-2 px-4 py-2 rounded-full border text-xs font-black transition-all",
-          (theme === 'light' || scrolled) 
+          isLight 
             ? "bg-black/5 border-black/10 text-[#063188]" 
-            : "glassy border-white/10 text-white hover:bg-white/10"
+            : theme === 'dark'
+              ? "bg-white/5 border-white/10 text-white"
+              : "glassy border-white/10 text-white hover:bg-white/10"
         )}
       >
         <currentTheme.icon size={14} className="text-brand-accent" />
@@ -53,7 +56,7 @@ export default function ThemeSelector({ scrolled }: { scrolled?: boolean }) {
             exit={{ opacity: 0, y: 10, scale: 0.95 }}
             className={cn(
               "absolute top-full mt-2 right-0 w-32 rounded-2xl border p-2 overflow-hidden shadow-2xl z-[60]",
-              (theme === 'light' || scrolled) ? "bg-white border-black/10 shadow-black/5" : "glassy border-white/20"
+              isLight ? "bg-white border-black/10 shadow-black/5" : "bg-[#1b3069] border-white/10"
             )}
           >
             {themes.map((t) => (
@@ -66,8 +69,8 @@ export default function ThemeSelector({ scrolled }: { scrolled?: boolean }) {
                 className={cn(
                   "w-full text-left px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center justify-between group",
                   theme === t.id 
-                    ? (theme === 'light' || scrolled) ? "bg-[#063188] text-white" : "bg-white text-[#063188]" 
-                    : (theme === 'light' || scrolled) ? "text-[#063188] hover:bg-black/5" : "text-white hover:bg-white/10"
+                    ? isLight ? "bg-[#063188] text-white" : "bg-white text-[#063188]" 
+                    : isLight ? "text-[#063188] hover:bg-black/5" : "text-white hover:bg-white/10"
                 )}
               >
                 <div className="flex items-center gap-2">
