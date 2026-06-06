@@ -6,6 +6,7 @@ import { Globe, ChevronDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useLocale } from 'next-intl';
 import { usePathname, useRouter } from 'next/navigation';
+import { useTheme } from '@/context/ThemeContext';
 
 const languages = [
   { code: 'en', name: 'English' },

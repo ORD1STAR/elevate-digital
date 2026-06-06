@@ -67,7 +67,7 @@ export default function Services() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-4xl md:text-6xl font-black text-white leading-tight"
+            className="text-4xl md:text-6xl font-black leading-tight"
           >
             {t('title')} <br /> <span className="text-brand-accent">{t('growFast')}</span>
           </motion.h3>

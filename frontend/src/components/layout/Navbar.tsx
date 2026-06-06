@@ -46,14 +46,14 @@ export default function Navbar() {
         className={cn(
           "rounded-full w-auto max-w-7xl px-4 md:px-10 py-3 flex items-center justify-between transition-all duration-500 pointer-events-auto border transition-transform",
           theme === 'light'
-            ? scrolled 
+            ? scrolled  
               ? "bg-white text-[#063188] border-black/5 shadow-2xl" 
-              : "bg-[#85a3e1]/10 text-[#063188] border-black/5"
+              : "bg-white text-[#063188] border-black/5"
             : theme === 'dark'
               ? scrolled
                 ? "bg-[#1b3069] text-white border-white/5 shadow-2xl"
-                : "bg-white/5 text-white border-white/5"
-              : scrolled
+                : "bg-[#1b3069] text-white border-white/5"  
+              : scrolled  
                 ? "glassy shadow-2xl border-white/50"
                 : "glassy bg-white/20 border-white/30 text-white!"
         )}
