@@ -32,7 +32,7 @@ export default function Hero() {
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="mb-8 px-5 py-2 rounded-full glassy border border-white/20 inline-flex items-center gap-2 text-white text-sm font-semibold shadow-2xl"
+            className="mb-8 px-6 py-3 rounded-full glassy border border-white/40 inline-flex items-center gap-2 text-sm font-black shadow-2xl"
           >
             <Sparkles size={16} className="text-brand-accent" />
             <span>{t('badge')}</span>
@@ -90,7 +90,7 @@ export default function Hero() {
               <div className="absolute inset-0 bg-brand-accent/10 opacity-0 group-hover:opacity-100 transition-opacity" />
             </button>
             
-            <button className="w-full sm:w-auto px-10 py-5 rounded-full glassy text-white font-bold text-xl border border-white/30 hover:bg-white/10 transition-all hover:scale-105 active:scale-95 shadow-xl">
+            <button className="w-full sm:w-auto px-10 py-5 rounded-full glassy font-black text-xl border border-white/40 hover:bg-white transition-all hover:scale-105 active:scale-95 shadow-xl">
               {t('learnMore')}
             </button>
           </motion.div>

@@ -75,8 +75,8 @@ export default function WhoAreWe() {
                   {feature.icon}
                 </div>
                 <div>
-                  <h4 className="text-xl font-bold text-white mb-2">{feature.title}</h4>
-                  <p className="text-white/60 leading-relaxed">{feature.description}</p>
+                  <h4 className="text-xl font-black mb-2">{feature.title}</h4>
+                  <p className="opacity-70 leading-relaxed font-bold">{feature.description}</p>
                 </div>
               </motion.div>
             ))}

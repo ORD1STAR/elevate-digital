@@ -7,29 +7,27 @@ Elevate Digital is a premium social media boosting platform tailored for Algeria
 - **Theme**: Bubbly, rounded shapes with Glassmorphism effects.
 - **Soap Bubble Effect**: Components use inset highlights (`top`) and shadows (`bottom`) to create a 3D depth, resembling soap bubbles.
 - **Languages**: Arabic (AR), French (FR), English (EN) with RTL support.
-- **Tech Stack**: Next.js 15 (App Router), Tailwind CSS 4, Framer Motion, Node.js (Express), MongoDB.
+- **Data**: Services and Feedbacks are fetched from MongoDB with full multi-language support (localized strings for names/descriptions).
+- **Tech Stack**: Next.js 16 (App Router), Tailwind CSS 4, Framer Motion, Node.js (Express), MongoDB.
 
 ## UI/UX Principles
 - **Color Palette (White Mode)**:
-  - Background: `#85a3e1` (Soft Blue) -> Transitions to white/90 on scroll for Navbar.
+  - Background: `#85a3e1` (Soft Blue) -> Transitions to opaque white (`bg-white/90`) on scroll for Navbar.
   - Text: `#063188` (Deep Blue)
   - Text Secondary: `#2915c0` (Vibrant Purple/Blue)
-- **Color Palette (Dark Mode)**:
-  - Background: `#1b3069` (Dark Navy)
-  - Text: `#FFFFFF` (White)
-  - Text Secondary: `#f5ae54` (Warm Orange)
+- **Glassmorphism**:
+  - Global `glassy` utility uses `30%` background opacity with `12px` blur for a premium frosted look.
+  - On hover, interactive glassy elements (like Navbar) should scale up (`scale-105`).
+- **Contrast Mandate**: NEVER use white text on light glassy backgrounds. Always use `#063188` (Deep Blue) for text on light bubbles.
 - **Interactions**:
-  - **Navbar**: Scales up on hover; changes transparency/color on scroll.
-  - **Inputs**: Bubbly shapes that scale and glow on focus.
-  - **Custom Dropdowns**: Bubbly, animated selectors for language and forms.
-  - **Auth**: Sliding "pull" animation between Login and Register forms.
+  - **Navbar**: Scales up on hover; switches to solid Deep Blue text on scroll.
+  - **Inputs**: High-contrast bubbly shapes (`bg-white/40` in Auth) with solid borders.
+  - **Auth**: High-opacity containers (`bg-white/50`) for clear readability.
 
 ## Custom Tailwind Utilities (Tailwind 4 @utility)
-- `.glassy`: Glassmorphism with soap bubble inset effects.
-- `.bubbly`: Standard rounded corners (1.5rem).
-- `.bubbly-lg`: Larger rounded corners (2.5rem).
-- `.input-bubbly`: Rounded inputs with interactive focus scaling and highlights.
-- `.mesh-gradient`: Multi-layered radial gradient background.
+- `.glassy`: Frosted glass with soap bubble inset highlights (`inset 0 4px 12px rgba(255,255,255,0.6)`).
+- `.input-bubbly`: High-contrast rounded inputs with solid placeholders and scaling focus states.
+- `.mesh-gradient`: Dynamic multi-layered radial gradient background.
 
 ## Key Components
 - `Navbar.tsx`: Sticky, responsive bar with custom `LanguageSelector` and Theme toggle.

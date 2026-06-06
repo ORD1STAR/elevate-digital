@@ -10,44 +10,49 @@ import {
   ShoppingCart
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
-
-const stats = [
-  { 
-    label: "Total Balance", 
-    value: "$1,250.00", 
-    icon: DollarSign, 
-    color: "bg-emerald-500",
-    trend: "+12.5% from last month"
-  },
-  { 
-    label: "Bought Services", 
-    value: "24", 
-    icon: ShoppingCart, 
-    color: "bg-blue-500",
-    trend: "8 active right now"
-  },
-  { 
-    label: "Total Orders", 
-    value: "156", 
-    icon: Package, 
-    color: "bg-brand-accent",
-    trend: "Last order: 2 hours ago"
-  },
-  { 
-    label: "Active Boosts", 
-    value: "12", 
-    icon: Clock, 
-    color: "bg-purple-500",
-    trend: "Running smoothly"
-  }
-];
+import { useAuth } from '@/context/AuthContext';
 
 export default function DashboardOverview() {
+  const { user } = useAuth();
+
+  const stats = [
+    { 
+      label: "Total Balance", 
+      value: user ? `$${user.balance.toFixed(2)}` : "$0.00", 
+      icon: DollarSign, 
+      color: "bg-emerald-500",
+      trend: "+0% from last month"
+    },
+    { 
+      label: "Bought Services", 
+      value: "0", 
+      icon: ShoppingCart, 
+      color: "bg-blue-500",
+      trend: "0 active right now"
+    },
+    { 
+      label: "Total Orders", 
+      value: "0", 
+      icon: Package, 
+      color: "bg-brand-accent",
+      trend: "No orders yet"
+    },
+    { 
+      label: "Active Boosts", 
+      value: "0", 
+      icon: Clock, 
+      color: "bg-purple-500",
+      trend: "All systems go"
+    }
+  ];
+
   return (
     <div className="space-y-10">
       {/* Welcome Header */}
       <div>
-        <h1 className="text-4xl font-black text-white mb-2">Hello, Ahmed! 👋</h1>
+        <h1 className="text-4xl font-black text-white mb-2">
+          Hello, {user?.displayName.split(' ')[0] || 'User'}! 👋
+        </h1>
         <p className="text-white/60 font-bold">Here&apos;s what&apos;s happening with your boosts today.</p>
       </div>
 

@@ -13,7 +13,7 @@ const languages = [
   { code: 'ar', name: 'العربية' },
 ];
 
-export default function LanguageSelector() {
+export default function LanguageSelector({ scrolled }: { scrolled?: boolean }) {
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const locale = useLocale();
@@ -45,7 +45,12 @@ export default function LanguageSelector() {
     <div className="relative" ref={containerRef}>
       <button 
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 glassy px-4 py-2 rounded-full border border-white/10 text-xs font-black text-white hover:bg-white/10 transition-all"
+        className={cn(
+          "flex items-center gap-2 px-4 py-2 rounded-full border text-xs font-black transition-all",
+          scrolled 
+            ? "bg-[#063188]/5 border-[#063188]/10 text-[#063188]" 
+            : "glassy border-white/10 text-white hover:bg-white/10"
+        )}
       >
         <Globe size={14} className="text-brand-accent" />
         <span className="uppercase">{currentLangName}</span>
@@ -58,7 +63,10 @@ export default function LanguageSelector() {
             initial={{ opacity: 0, y: 10, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.95 }}
-            className="absolute top-full mt-2 right-0 w-32 glassy rounded-2xl border border-white/20 p-2 overflow-hidden shadow-2xl z-[60]"
+            className={cn(
+              "absolute top-full mt-2 right-0 w-32 rounded-2xl border p-2 overflow-hidden shadow-2xl z-[60]",
+              scrolled ? "bg-white border-[#063188]/10" : "glassy border-white/20"
+            )}
           >
             {languages.map((lang) => (
               <button
@@ -67,12 +75,12 @@ export default function LanguageSelector() {
                 className={cn(
                   "w-full text-left px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center justify-between group",
                   locale === lang.code 
-                    ? "bg-white text-[#063188]" 
-                    : "text-white hover:bg-white/10"
+                    ? scrolled ? "bg-[#063188] text-white" : "bg-white text-[#063188]" 
+                    : scrolled ? "text-[#063188] hover:bg-[#063188]/5" : "text-white hover:bg-white/10"
                 )}
               >
                 <span className="uppercase">{lang.code}</span>
-                <span className="opacity-0 group-hover:opacity-50 text-[8px]">{lang.name}</span>
+                <span className="opacity-40 group-hover:opacity-60 text-[8px]">{lang.name}</span>
               </button>
             ))}
           </motion.div>

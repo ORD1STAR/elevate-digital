@@ -49,23 +49,25 @@
 }
 
 @utility glassy {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  /* Soap Bubble Effect: Inset highlights and shadows */
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  /* Soap Bubble Effect */
   box-shadow: 
-    0 8px 32px 0 rgba(31, 38, 135, 0.07),
-    inset 0 4px 8px rgba(255, 255, 255, 0.3),
-    inset 0 -4px 8px rgba(0, 0, 0, 0.05);
+    0 8px 32px 0 rgba(31, 38, 135, 0.1),
+    inset 0 4px 12px rgba(255, 255, 255, 0.6),
+    inset 0 -4px 12px rgba(0, 0, 0, 0.03);
+  color: #063188;
 
   .dark & {
-    background: rgba(15, 23, 42, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(15, 23, 42, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 
-      0 8px 32px 0 rgba(0, 0, 0, 0.2),
-      inset 0 4px 8px rgba(255, 255, 255, 0.05),
-      inset 0 -4px 8px rgba(0, 0, 0, 0.2);
+      0 8px 32px 0 rgba(0, 0, 0, 0.3),
+      inset 0 4px 12px rgba(255, 255, 255, 0.05),
+      inset 0 -4px 12px rgba(0, 0, 0, 0.2);
+    color: #ffffff;
   }
 }
 
@@ -86,19 +88,19 @@
 }
 
 @utility input-bubbly {
-  @apply w-full px-8 py-4 rounded-full bg-white/5 border border-white/10 text-white outline-none transition-all placeholder:text-white/20 font-semibold;
+  @apply w-full px-8 py-4 rounded-full bg-white/20 border border-white/40 text-white outline-none transition-all placeholder:text-white/40 font-bold;
   
   &:focus {
-    @apply scale-[1.02] bg-white/15 border-white/30 shadow-2xl;
+    @apply scale-[1.01] bg-white/30 border-white/60 shadow-2xl;
     box-shadow: 
-      0 20px 50px rgba(0, 0, 0, 0.2),
+      0 15px 40px rgba(0, 0, 0, 0.2),
       inset 0 4px 12px rgba(255, 255, 255, 0.4);
   }
 
   .dark & {
-    @apply bg-black/20 border-white/5;
+    @apply bg-black/40 border-white/10 placeholder:text-white/20;
     &:focus {
-      @apply bg-black/40 border-white/20;
+      @apply bg-black/60 border-white/30;
     }
   }
 }

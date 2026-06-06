@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Sun, Moon } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import LanguageSelector from './LanguageSelector';
 
 export default function Navbar() {
@@ -14,6 +14,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [isDark, setIsDark] = useState(false);
   const t = useTranslations('Navbar');
+  const locale = useLocale();
 
   const navLinks = [
     { name: t('home'), href: '#home' },
@@ -42,35 +43,38 @@ export default function Navbar() {
       <motion.div
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        whileHover={{ scale: 1.02 }}
+        whileHover={{ scale: 1.05 }}
         className={cn(
-          "glassy rounded-full w-full max-w-7xl px-4 md:px-8 py-3 flex items-center justify-between transition-all duration-500 pointer-events-auto",
+          "rounded-full w-full max-w-7xl px-4 md:px-8 py-3 flex items-center justify-between transition-all duration-500 pointer-events-auto border transition-transform",
           scrolled 
-            ? "max-w-6xl shadow-2xl bg-white/90 text-[#063188] dark:bg-black/60 dark:text-white" 
-            : "bg-white/10 text-white dark:bg-white/5"
+            ? "glassy shadow-2xl bg-white/90! border-white/50" 
+            : "glassy bg-white/20 border-white/30 text-white!"
         )}
       >
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-3 group">
+        <Link href="/" className="flex items-center gap-3 group shrink-0 mr-2">
           <div className="relative w-10 h-10 rounded-full overflow-hidden border-2 border-white/20 group-hover:border-white/50 transition-all">
             <Image src="/logo.jpg" alt="Elevate Digital" fill className="object-cover" />
           </div>
-          <span className="font-bold text-xl tracking-tight hidden sm:block">
-            Elevate <span className={cn(scrolled ? "text-[#063188]/80 dark:text-white/80" : "text-white/80")}>Digital</span>
+          <span className={cn(
+            "font-black text-lg xl:text-xl tracking-tight hidden lg:block whitespace-nowrap",
+            scrolled ? "text-[#063188]" : "text-white"
+          )}>
+            Elevate <span className={cn(scrolled ? "text-[#063188]/60" : "text-white/60")}>Digital</span>
           </span>
         </Link>
 
         {/* Desktop Links */}
-        <div className="hidden lg:flex items-center gap-6">
+        <div className="hidden lg:flex items-center justify-center gap-3 xl:gap-6 flex-1 px-2">
           {navLinks.map((link) => (
             <Link 
               key={link.name} 
               href={link.href}
               className={cn(
-                "text-xs xl:text-sm font-bold transition-colors",
+                "text-xs xl:text-sm font-black transition-colors whitespace-nowrap",
                 scrolled 
-                  ? "text-[#063188]/70 hover:text-[#063188] dark:text-white/70 dark:hover:text-white" 
-                  : "text-white/80 hover:text-white"
+                  ? "text-[#063188]" 
+                  : "text-white"
               )}
             >
               {link.name}
@@ -79,34 +83,34 @@ export default function Navbar() {
         </div>
 
         {/* Actions (Language, Theme, Auth) */}
-        <div className="flex items-center gap-2 sm:gap-4">
+        <div className="flex items-center gap-2 xl:gap-4 shrink-0 ml-2">
           <div className="hidden sm:block">
-            <LanguageSelector />
+            <LanguageSelector scrolled={scrolled} />
           </div>
 
           {/* Theme Switcher */}
           <button 
             onClick={toggleTheme}
             className={cn(
-              "w-10 h-10 rounded-full glassy flex items-center justify-center transition-all border border-white/10",
+              "w-10 h-10 rounded-full flex items-center justify-center transition-all border shrink-0",
               scrolled 
-                ? "bg-[#063188]/5 dark:bg-white/5" 
-                : "hover:bg-white/20"
+                ? "bg-[#063188]/5 border-[#063188]/10" 
+                : "bg-white/10 hover:bg-white/20 border-white/20"
             )}
           >
-            {isDark ? <Sun size={18} className="text-brand-accent" /> : <Moon size={18} className={cn(scrolled && !isDark ? "text-[#063188]" : "text-white")} />}
+            {isDark ? <Sun size={18} className="text-brand-accent" /> : <Moon size={18} className={cn(scrolled ? "text-[#063188]" : "text-white")} />}
           </button>
 
           <Link 
             href="/auth" 
             className={cn(
-              "hidden sm:block px-6 py-2.5 rounded-full font-black text-xs xl:text-sm transition-all hover:scale-105 active:scale-95 shadow-lg",
-              scrolled && !isDark
-                ? "bg-[#063188] text-white hover:bg-[#063188]/90"
+              "hidden sm:flex px-6 xl:px-8 py-2.5 rounded-full font-black text-xs xl:text-sm transition-all hover:scale-105 active:scale-95 shadow-lg whitespace-nowrap items-center justify-center",
+              scrolled
+                ? "bg-[#063188] text-white hover:shadow-[#063188]/20"
                 : "bg-white text-[#063188] hover:bg-white/90"
             )}
           >
-            {t('login')}
+            {locale === 'fr' ? 'Connexion' : locale === 'ar' ? 'دخول' : 'Login'}
           </Link>
 
           <button 

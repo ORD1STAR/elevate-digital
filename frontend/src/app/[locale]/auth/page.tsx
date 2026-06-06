@@ -4,17 +4,79 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, Mail, Lock, User, AtSign, Eye, EyeOff, ArrowRight } from 'lucide-react';
+import { ArrowLeft, Mail, Lock, User, AtSign, Eye, EyeOff, ArrowRight, Loader2 } from 'lucide-react';
 import { useTranslations, useLocale } from 'next-intl';
+import { useRouter } from 'next/navigation';
+import { useAuth } from '@/context/AuthContext';
 
 export default function AuthPage() {
   const t = useTranslations('Auth');
   const locale = useLocale();
   const isRtl = locale === 'ar';
+  const router = useRouter();
+  const { login } = useAuth();
+
   const [isLogin, setIsLogin] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
 
-  const toggleAuth = () => setIsLogin(!isLogin);
+  // Form states
+  const [formData, setFormData] = useState({
+    identifier: '', // email or username for login
+    email: '',      // for register
+    username: '',   // for register
+    displayName: '', // for register
+    password: ''
+  });
+
+  const toggleAuth = () => {
+    setIsLogin(!isLogin);
+    setError('');
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setError('');
+
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
+    const endpoint = isLogin ? '/auth/login' : '/auth/register';
+    
+    try {
+      const body = isLogin 
+        ? { identifier: formData.identifier, password: formData.password }
+        : { 
+            displayName: formData.displayName, 
+            username: formData.username, 
+            email: formData.email, 
+            password: formData.password 
+          };
+
+      const response = await fetch(`${apiUrl}${endpoint}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Something went wrong');
+      }
+
+      login(data.token, data.user);
+      router.push(`/${locale}/dashboard`);
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <main className="min-h-screen mesh-gradient flex items-center justify-center p-6 overflow-hidden relative">
@@ -40,42 +102,56 @@ export default function AuthPage() {
               animate={{ x: 0, opacity: 1 }}
               exit={{ x: isRtl ? 1000 : -1000, opacity: 0 }}
               transition={{ type: 'spring', damping: 20, stiffness: 100 }}
-              className="glassy p-10 md:p-16 rounded-[4rem] border border-white/20 shadow-2xl relative overflow-hidden"
+              className="glassy bg-white/50! p-10 md:p-16 rounded-[4rem] border border-white/40 shadow-2xl relative overflow-hidden"
             >
               <div className="text-center mb-12">
-                <div className="w-20 h-20 mx-auto mb-6 p-1 rounded-3xl glassy border border-white/30">
+                <div className="w-20 h-20 mx-auto mb-6 p-1 rounded-3xl glassy border border-white/50 bg-white/20">
                   <Image src="/logo.jpg" alt="Logo" width={80} height={80} className="rounded-2xl" />
                 </div>
-                <h1 className="text-4xl font-black text-white mb-2">{t('welcomeBack')}</h1>
-                <p className="text-white/60 font-medium">{t('loginSubtitle')}</p>
+                <h1 className="text-4xl font-black text-[#063188] mb-2">{t('welcomeBack')}</h1>
+                <p className="text-[#063188]/70 font-black">{t('loginSubtitle')}</p>
               </div>
 
-              <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+              {error && (
+                <div className="mb-6 p-4 rounded-2xl bg-red-500/20 border border-red-500/50 text-[#063188] text-sm font-black text-center">
+                  {error}
+                </div>
+              )}
+
+              <form className="space-y-6" onSubmit={handleSubmit}>
                 <div className="space-y-2">
-                  <label className="text-white/70 font-bold ml-6 rtl:ml-0 rtl:mr-6 text-sm">{t('emailOrUsername')}</label>
+                  <label className="text-[#063188]/80 font-black ml-6 rtl:ml-0 rtl:mr-6 text-sm uppercase tracking-wider">{t('emailOrUsername')}</label>
                   <div className="relative">
-                    <AtSign className="absolute left-6 rtl:left-auto rtl:right-6 top-1/2 -translate-y-1/2 text-white/30 z-10" size={20} />
+                    <AtSign className="absolute left-6 rtl:left-auto rtl:right-6 top-1/2 -translate-y-1/2 text-[#063188]/40 z-10" size={20} />
                     <input 
                       type="text" 
+                      name="identifier"
+                      value={formData.identifier}
+                      onChange={handleInputChange}
                       placeholder="john_doe" 
-                      className="input-bubbly pl-14 rtl:pl-6 rtl:pr-14"
+                      required
+                      className="input-bubbly !bg-white/40 !border-white/60 !text-[#063188] !placeholder-[#063188]/30 shadow-inner pl-14 pr-14 rtl:pl-6 rtl:pr-14"
                     />
                   </div>
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-white/70 font-bold ml-6 rtl:ml-0 rtl:mr-6 text-sm">{t('password')}</label>
+                  <label className="text-[#063188]/80 font-black ml-6 rtl:ml-0 rtl:mr-6 text-sm uppercase tracking-wider">{t('password')}</label>
                   <div className="relative">
-                    <Lock className="absolute left-6 rtl:left-auto rtl:right-6 top-1/2 -translate-y-1/2 text-white/30 z-10" size={20} />
+                    <Lock className="absolute left-6 rtl:left-auto rtl:right-6 top-1/2 -translate-y-1/2 text-[#063188]/40 z-10" size={20} />
                     <input 
                       type={showPassword ? "text" : "password"} 
+                      name="password"
+                      value={formData.password}
+                      onChange={handleInputChange}
                       placeholder="••••••••" 
-                      className="input-bubbly pl-14 pr-14"
+                      required
+                      className="input-bubbly !bg-white/40 !border-white/60 !text-[#063188] !placeholder-[#063188]/30 shadow-inner pl-14 pr-14 rtl:pl-6 rtl:pr-14"
                     />
                     <button 
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-6 rtl:right-auto rtl:left-6 top-1/2 -translate-y-1/2 text-white/30 hover:text-white transition-colors z-10"
+                      className="absolute right-6 rtl:right-auto rtl:left-6 top-1/2 -translate-y-1/2 text-[#063188]/40 hover:text-[#063188] transition-colors z-10"
                     >
                       {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                     </button>
@@ -83,18 +159,22 @@ export default function AuthPage() {
                 </div>
 
                 <div className="flex justify-end px-2">
-                  <button type="button" className="text-white/50 text-sm font-bold hover:text-brand-accent transition-colors">
+                  <button type="button" className="text-[#063188]/60 text-sm font-black hover:text-brand-accent transition-colors">
                     {t('forgotPassword')}
                   </button>
                 </div>
 
-                <button className="w-full py-5 rounded-full bg-white text-[#063188] font-black text-xl shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all">
+                <button 
+                  disabled={isLoading}
+                  className="w-full py-5 rounded-full bg-[#063188] text-white font-black text-xl shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2"
+                >
+                  {isLoading && <Loader2 className="animate-spin" size={24} />}
                   {t('login')}
                 </button>
               </form>
 
-              <div className="mt-12 text-center pt-8 border-t border-white/10">
-                <p className="text-white/50 font-bold">
+              <div className="mt-12 text-center pt-8 border-t border-[#063188]/10">
+                <p className="text-[#063188]/60 font-black">
                   {t('newToElevate')} 
                   <button 
                     onClick={toggleAuth}
@@ -113,73 +193,99 @@ export default function AuthPage() {
               animate={{ x: 0, opacity: 1 }}
               exit={{ x: isRtl ? -1000 : 1000, opacity: 0 }}
               transition={{ type: 'spring', damping: 20, stiffness: 100 }}
-              className="glassy p-10 md:p-16 rounded-[4rem] border border-white/20 shadow-2xl relative overflow-hidden"
+              className="glassy bg-white/50! p-10 md:p-16 rounded-[4rem] border border-white/40 shadow-2xl relative overflow-hidden"
             >
               <div className="text-center mb-10">
-                <h1 className="text-4xl font-black text-white mb-2">{t('joinElevate')}</h1>
-                <p className="text-white/60 font-medium">{t('registerSubtitle')}</p>
+                <h1 className="text-4xl font-black text-[#063188] mb-2">{t('joinElevate')}</h1>
+                <p className="text-[#063188]/70 font-black">{t('registerSubtitle')}</p>
               </div>
 
-              <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
+              {error && (
+                <div className="mb-6 p-4 rounded-2xl bg-red-500/20 border border-red-500/50 text-[#063188] text-sm font-black text-center">
+                  {error}
+                </div>
+              )}
+
+              <form className="space-y-5" onSubmit={handleSubmit}>
                 <div className="space-y-2">
-                  <label className="text-white/70 font-bold ml-6 rtl:ml-0 rtl:mr-6 text-sm">{t('fullName')}</label>
+                  <label className="text-[#063188]/80 font-black ml-6 rtl:ml-0 rtl:mr-6 text-sm uppercase tracking-wider">{t('fullName')}</label>
                   <div className="relative">
-                    <User className="absolute left-6 rtl:left-auto rtl:right-6 top-1/2 -translate-y-1/2 text-white/30 z-10" size={20} />
+                    <User className="absolute left-6 rtl:left-auto rtl:right-6 top-1/2 -translate-y-1/2 text-[#063188]/40 z-10" size={20} />
                     <input 
                       type="text" 
+                      name="displayName"
+                      value={formData.displayName}
+                      onChange={handleInputChange}
                       placeholder="John Doe" 
-                      className="input-bubbly pl-14 rtl:pl-6 rtl:pr-14"
+                      required
+                      className="input-bubbly !bg-white/40 !border-white/60 !text-[#063188] !placeholder-[#063188]/30 shadow-inner pl-14 pr-14 rtl:pl-6 rtl:pr-14"
                     />
                   </div>
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-white/70 font-bold ml-6 rtl:ml-0 rtl:mr-6 text-sm">{t('emailAddress')}</label>
+                  <label className="text-[#063188]/80 font-black ml-6 rtl:ml-0 rtl:mr-6 text-sm uppercase tracking-wider">{t('emailAddress')}</label>
                   <div className="relative">
-                    <Mail className="absolute left-6 rtl:left-auto rtl:right-6 top-1/2 -translate-y-1/2 text-white/30 z-10" size={20} />
+                    <Mail className="absolute left-6 rtl:left-auto rtl:right-6 top-1/2 -translate-y-1/2 text-[#063188]/40 z-10" size={20} />
                     <input 
                       type="email" 
+                      name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
                       placeholder="john@example.com" 
-                      className="input-bubbly pl-14 rtl:pl-6 rtl:pr-14"
+                      required
+                      className="input-bubbly !bg-white/40 !border-white/60 !text-[#063188] !placeholder-[#063188]/30 shadow-inner pl-14 pr-14 rtl:pl-6 rtl:pr-14"
                     />
                   </div>
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-white/70 font-bold ml-6 rtl:ml-0 rtl:mr-6 text-sm">{t('username')}</label>
+                  <label className="text-[#063188]/80 font-black ml-6 rtl:ml-0 rtl:mr-6 text-sm uppercase tracking-wider">{t('username')}</label>
                   <div className="relative">
-                    <AtSign className="absolute left-6 rtl:left-auto rtl:right-6 top-1/2 -translate-y-1/2 text-white/30 z-10" size={20} />
+                    <AtSign className="absolute left-6 rtl:left-auto rtl:right-6 top-1/2 -translate-y-1/2 text-[#063188]/40 z-10" size={20} />
                     <input 
                       type="text" 
+                      name="username"
+                      value={formData.username}
+                      onChange={handleInputChange}
                       placeholder="john_doe" 
-                      className="input-bubbly pl-14 rtl:pl-6 rtl:pr-14"
+                      required
+                      className="input-bubbly !bg-white/40 !border-white/60 !text-[#063188] !placeholder-[#063188]/30 shadow-inner pl-14 pr-14 rtl:pl-6 rtl:pr-14"
                     />
                   </div>
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-white/70 font-bold ml-6 rtl:ml-0 rtl:mr-6 text-sm">{t('password')}</label>
+                  <label className="text-[#063188]/80 font-black ml-6 rtl:ml-0 rtl:mr-6 text-sm uppercase tracking-wider">{t('password')}</label>
                   <div className="relative">
-                    <Lock className="absolute left-6 rtl:left-auto rtl:right-6 top-1/2 -translate-y-1/2 text-white/30 z-10" size={20} />
+                    <Lock className="absolute left-6 rtl:left-auto rtl:right-6 top-1/2 -translate-y-1/2 text-[#063188]/40 z-10" size={20} />
                     <input 
                       type={showPassword ? "text" : "password"} 
+                      name="password"
+                      value={formData.password}
+                      onChange={handleInputChange}
                       placeholder="••••••••" 
-                      className="input-bubbly pl-14 rtl:pl-6 rtl:pr-14"
+                      required
+                      className="input-bubbly !bg-white/40 !border-white/60 !text-[#063188] !placeholder-[#063188]/30 shadow-inner pl-14 pr-14 rtl:pl-6 rtl:pr-14"
                     />
                   </div>
                 </div>
 
-                <button className="w-full mt-4 py-5 rounded-full bg-brand-accent text-[#063188] font-black text-xl shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all">
+                <button 
+                  disabled={isLoading}
+                  className="w-full mt-4 py-5 rounded-full bg-[#063188] text-white font-black text-xl shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2"
+                >
+                  {isLoading && <Loader2 className="animate-spin" size={24} />}
                   {t('signUp')}
                 </button>
               </form>
 
-              <div className="mt-10 text-center pt-8 border-t border-white/10">
-                <p className="text-white/50 font-bold">
+              <div className="mt-10 text-center pt-8 border-t border-[#063188]/10">
+                <p className="text-[#063188]/60 font-black">
                   {t('alreadyHaveAccount')} 
                   <button 
                     onClick={toggleAuth}
-                    className="mx-2 text-white hover:underline decoration-2 underline-offset-4"
+                    className="mx-2 text-brand-accent hover:underline decoration-2 underline-offset-4"
                   >
                     {t('logIn')}
                   </button>
