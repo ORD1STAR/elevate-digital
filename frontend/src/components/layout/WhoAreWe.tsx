@@ -1,0 +1,88 @@
+'use client';
+
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Shield, Target, Zap } from 'lucide-react';
+
+const features = [
+  {
+    icon: <Zap className="text-brand-accent" size={32} />,
+    title: "Fast Delivery",
+    description: "Most orders start within minutes. We prioritize speed without compromising quality."
+  },
+  {
+    icon: <Shield className="text-brand-accent" size={32} />,
+    title: "Secure & Private",
+    description: "Your account safety is our priority. We never ask for your password or sensitive data."
+  },
+  {
+    icon: <Target className="text-brand-accent" size={32} />,
+    title: "Quality Results",
+    description: "High-retention boosts that look natural and help you reach your growth targets."
+  }
+];
+
+export default function WhoAreWe() {
+  return (
+    <section id="who-are-we" className="py-24 bg-white/5 relative overflow-hidden">
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="flex flex-col lg:flex-row items-center gap-16">
+          
+          {/* Text Content */}
+          <div className="lg:w-1/2">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="space-y-6"
+            >
+              <h2 className="text-brand-accent font-black tracking-widest uppercase text-sm">Who Are We?</h2>
+              <h3 className="text-4xl md:text-5xl font-black text-white leading-tight">
+                Empowering Algerian E-commerce <span className="text-brand-accent">Since Day One.</span>
+              </h3>
+              <p className="text-lg text-white/70 leading-relaxed font-medium">
+                At Elevate Digital, we understand the unique challenges of the Algerian digital market. 
+                Our mission is to provide local businesses with the same high-end social media tools 
+                used by global brands, helping you stand out in a crowded marketplace.
+              </p>
+              
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 pt-6">
+                <div className="space-y-2">
+                  <h4 className="text-2xl font-bold text-white">500+</h4>
+                  <p className="text-white/60 font-medium text-sm italic">Happy Clients</p>
+                </div>
+                <div className="space-y-2">
+                  <h4 className="text-2xl font-bold text-white">1M+</h4>
+                  <p className="text-white/60 font-medium text-sm italic">Services Delivered</p>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Cards */}
+          <div className="lg:w-1/2 grid grid-cols-1 gap-6">
+            {features.map((feature, index) => (
+              <motion.div
+                key={feature.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="glassy p-8 rounded-3xl border border-white/10 flex items-start gap-6 hover:bg-white/20 transition-all group"
+              >
+                <div className="p-4 rounded-2xl bg-white/10 group-hover:bg-brand-accent/20 transition-colors shrink-0">
+                  {feature.icon}
+                </div>
+                <div>
+                  <h4 className="text-xl font-bold text-white mb-2">{feature.title}</h4>
+                  <p className="text-white/60 leading-relaxed">{feature.description}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+        </div>
+      </div>
+    </section>
+  );
+}

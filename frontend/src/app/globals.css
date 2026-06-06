@@ -1,57 +1,65 @@
 @import "tailwindcss";
 
 @theme inline {
-  /* Brand Colors - Light Mode (Default) */
-  --color-brand-bg-light: #85a3e1;
-  --color-brand-text-light: #063188;
-  --color-brand-secondary-light: #2915c0;
+  /* Brand Colors - Light Mode */
+  --color-brand-bg-light: #f0f4ff; /* Lighter background for better contrast */
+  --color-brand-primary: #063188;
+  --color-brand-secondary: #2915c0;
+  --color-brand-accent: #f5ae54;
 
   /* Brand Colors - Dark Mode */
-  --color-brand-bg-dark: #1b3069;
-  --color-brand-text-dark: #ffffff;
-  --color-brand-secondary-dark: #f5ae54;
+  --color-brand-bg-dark: #0f172a;
+  --color-brand-text-dark: #f8fafc;
 
   /* Bubbly / Rounded Shapes */
-  --radius-bubbly: 2rem;
-  --radius-bubbly-lg: 3rem;
+  --radius-bubbly: 1.5rem;
+  --radius-bubbly-lg: 2.5rem;
+  --radius-bubbly-full: 9999px;
 
   /* Glassy Effects */
-  --alpha-glass: 0.2;
-  --blur-glass: 12px;
+  --alpha-glass: 0.1;
+  --blur-glass: 16px;
 }
 
 :root {
-  --background: var(--color-brand-bg-light);
-  --foreground: var(--color-brand-text-light);
-  --secondary: var(--color-brand-secondary-light);
+  --background: #85a3e1; /* Reverting to requested bg but will use gradients */
+  --foreground: #063188;
+  --secondary: #2915c0;
+  --accent: #f5ae54;
 }
 
 .dark {
-  --background: var(--color-brand-bg-dark);
-  --foreground: var(--color-brand-text-dark);
-  --secondary: var(--color-brand-secondary-dark);
+  --background: #1b3069;
+  --foreground: #ffffff;
+  --secondary: #f5ae54;
 }
 
 @layer base {
   body {
-    background: var(--background);
+    background-color: var(--background);
     color: var(--foreground);
-    font-family: Arial, Helvetica, sans-serif;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    font-family: var(--font-plus-jakarta), sans-serif;
+    @apply antialiased selection:bg-brand-secondary selection:text-white;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-plus-jakarta), sans-serif;
+    @apply tracking-tight font-bold;
   }
 }
 
 @layer components {
   .glassy {
-    background: rgba(255, 255, 255, var(--alpha-glass));
-    backdrop-filter: blur(var(--blur-glass));
-    -webkit-backdrop-filter: blur(var(--blur-glass));
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
   }
 
   .dark .glassy {
-    background: rgba(0, 0, 0, var(--alpha-glass));
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(15, 23, 42, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.05);
   }
 
   .bubbly {
@@ -61,4 +69,29 @@
   .bubbly-lg {
     border-radius: var(--radius-bubbly-lg);
   }
+
+  .btn-primary {
+    @apply px-8 py-3 bg-brand-primary text-white font-bold rounded-full transition-all hover:scale-105 active:scale-95 shadow-lg hover:shadow-brand-primary/20;
+  }
+
+  .btn-secondary {
+    @apply px-8 py-3 glassy text-brand-primary font-bold rounded-full transition-all hover:scale-105 active:scale-95 shadow-md;
+  }
+}
+
+/* Custom Mesh Gradient Background */
+.mesh-gradient {
+  background-color: #85a3e1;
+  background-image: 
+    radial-gradient(at 0% 0%, hsla(225, 39%, 30%, 1) 0, transparent 50%), 
+    radial-gradient(at 50% 0%, hsla(225, 39%, 23%, 1) 0, transparent 50%), 
+    radial-gradient(at 100% 0%, hsla(225, 39%, 30%, 1) 0, transparent 50%);
+}
+
+.dark .mesh-gradient {
+  background-color: #1b3069;
+  background-image: 
+    radial-gradient(at 0% 0%, hsla(225, 39%, 10%, 1) 0, transparent 50%), 
+    radial-gradient(at 50% 0%, hsla(225, 39%, 5%, 1) 0, transparent 50%), 
+    radial-gradient(at 100% 0%, hsla(225, 39%, 10%, 1) 0, transparent 50%);
 }
