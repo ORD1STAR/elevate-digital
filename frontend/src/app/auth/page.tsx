@@ -50,11 +50,11 @@ export default function AuthPage() {
                 <div className="space-y-2">
                   <label className="text-white/70 font-bold ml-6 text-sm">Email or Username</label>
                   <div className="relative">
-                    <AtSign className="absolute left-6 top-1/2 -translate-y-1/2 text-white/30" size={20} />
+                    <AtSign className="absolute left-6 top-1/2 -translate-y-1/2 text-white/30 z-10" size={20} />
                     <input 
                       type="text" 
                       placeholder="john_doe" 
-                      className="w-full pl-14 pr-8 py-4 rounded-full bg-white/5 border border-white/10 text-white focus:border-brand-accent focus:bg-white/10 outline-none transition-all placeholder:text-white/20 font-medium"
+                      className="input-bubbly pl-14"
                     />
                   </div>
                 </div>
@@ -62,16 +62,16 @@ export default function AuthPage() {
                 <div className="space-y-2">
                   <label className="text-white/70 font-bold ml-6 text-sm">Password</label>
                   <div className="relative">
-                    <Lock className="absolute left-6 top-1/2 -translate-y-1/2 text-white/30" size={20} />
+                    <Lock className="absolute left-6 top-1/2 -translate-y-1/2 text-white/30 z-10" size={20} />
                     <input 
                       type={showPassword ? "text" : "password"} 
                       placeholder="••••••••" 
-                      className="w-full pl-14 pr-14 py-4 rounded-full bg-white/5 border border-white/10 text-white focus:border-brand-accent focus:bg-white/10 outline-none transition-all placeholder:text-white/20 font-medium"
+                      className="input-bubbly pl-14 pr-14"
                     />
                     <button 
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-6 top-1/2 -translate-y-1/2 text-white/30 hover:text-white transition-colors"
+                      className="absolute right-6 top-1/2 -translate-y-1/2 text-white/30 hover:text-white transition-colors z-10"
                     >
                       {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                     </button>
@@ -120,11 +120,11 @@ export default function AuthPage() {
                 <div className="space-y-2">
                   <label className="text-white/70 font-bold ml-6 text-sm">Full Name</label>
                   <div className="relative">
-                    <User className="absolute left-6 top-1/2 -translate-y-1/2 text-white/30" size={20} />
+                    <User className="absolute left-6 top-1/2 -translate-y-1/2 text-white/30 z-10" size={20} />
                     <input 
                       type="text" 
                       placeholder="John Doe" 
-                      className="w-full pl-14 pr-8 py-4 rounded-full bg-white/5 border border-white/10 text-white focus:border-brand-accent focus:bg-white/10 outline-none transition-all placeholder:text-white/20 font-medium"
+                      className="input-bubbly pl-14"
                     />
                   </div>
                 </div>
@@ -132,11 +132,11 @@ export default function AuthPage() {
                 <div className="space-y-2">
                   <label className="text-white/70 font-bold ml-6 text-sm">Email Address</label>
                   <div className="relative">
-                    <Mail className="absolute left-6 top-1/2 -translate-y-1/2 text-white/30" size={20} />
+                    <Mail className="absolute left-6 top-1/2 -translate-y-1/2 text-white/30 z-10" size={20} />
                     <input 
                       type="email" 
                       placeholder="john@example.com" 
-                      className="w-full pl-14 pr-8 py-4 rounded-full bg-white/5 border border-white/10 text-white focus:border-brand-accent focus:bg-white/10 outline-none transition-all placeholder:text-white/20 font-medium"
+                      className="input-bubbly pl-14"
                     />
                   </div>
                 </div>
@@ -144,11 +144,11 @@ export default function AuthPage() {
                 <div className="space-y-2">
                   <label className="text-white/70 font-bold ml-6 text-sm">Username</label>
                   <div className="relative">
-                    <AtSign className="absolute left-6 top-1/2 -translate-y-1/2 text-white/30" size={20} />
+                    <AtSign className="absolute left-6 top-1/2 -translate-y-1/2 text-white/30 z-10" size={20} />
                     <input 
                       type="text" 
                       placeholder="john_doe" 
-                      className="w-full pl-14 pr-8 py-4 rounded-full bg-white/5 border border-white/10 text-white focus:border-brand-accent focus:bg-white/10 outline-none transition-all placeholder:text-white/20 font-medium"
+                      className="input-bubbly pl-14"
                     />
                   </div>
                 </div>
@@ -156,11 +156,11 @@ export default function AuthPage() {
                 <div className="space-y-2">
                   <label className="text-white/70 font-bold ml-6 text-sm">Password</label>
                   <div className="relative">
-                    <Lock className="absolute left-6 top-1/2 -translate-y-1/2 text-white/30" size={20} />
+                    <Lock className="absolute left-6 top-1/2 -translate-y-1/2 text-white/30 z-10" size={20} />
                     <input 
                       type={showPassword ? "text" : "password"} 
                       placeholder="••••••••" 
-                      className="w-full pl-14 pr-14 py-4 rounded-full bg-white/5 border border-white/10 text-white focus:border-brand-accent focus:bg-white/10 outline-none transition-all placeholder:text-white/20 font-medium"
+                      className="input-bubbly pl-14 pr-14"
                     />
                   </div>
                 </div>

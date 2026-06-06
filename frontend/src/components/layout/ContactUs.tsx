@@ -72,7 +72,7 @@ export default function ContactUs() {
                     <input 
                       type="text" 
                       placeholder="John Doe" 
-                      className="w-full px-8 py-4 rounded-full bg-white/5 border border-white/20 text-white focus:border-brand-accent focus:bg-white/10 outline-none transition-all placeholder:text-white/30 font-semibold"
+                      className="input-bubbly"
                     />
                   </div>
                   <div className="space-y-3">
@@ -80,14 +80,14 @@ export default function ContactUs() {
                     <input 
                       type="email" 
                       placeholder="john@example.com" 
-                      className="w-full px-8 py-4 rounded-full bg-white/5 border border-white/20 text-white focus:border-brand-accent focus:bg-white/10 outline-none transition-all placeholder:text-white/30 font-semibold"
+                      className="input-bubbly"
                     />
                   </div>
                 </div>
 
                 <div className="space-y-3">
                   <label className="text-white/80 font-bold ml-4">Subject</label>
-                  <select className="w-full px-8 py-4 rounded-full bg-white/5 border border-white/20 text-white focus:border-brand-accent focus:bg-white/10 outline-none transition-all appearance-none font-semibold">
+                  <select className="input-bubbly appearance-none">
                     <option className="bg-[#1b3069]">General Inquiry</option>
                     <option className="bg-[#1b3069]">Instagram Boost</option>
                     <option className="bg-[#1b3069]">TikTok Boost</option>
@@ -100,7 +100,7 @@ export default function ContactUs() {
                   <textarea 
                     rows={4} 
                     placeholder="Tell us about your project..." 
-                    className="w-full px-8 py-6 rounded-[2rem] bg-white/5 border border-white/20 text-white focus:border-brand-accent focus:bg-white/10 outline-none transition-all placeholder:text-white/30 resize-none font-semibold"
+                    className="input-bubbly rounded-[2rem] resize-none"
                   ></textarea>
                 </div>
 
