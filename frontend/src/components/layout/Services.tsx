@@ -94,18 +94,18 @@ export default function Services() {
                     {getPlatformIcon(platform)}
                   </div>
 
-                  <h4 className="text-2xl font-black text-white mb-8">{platform}</h4>
+                  <h4 className="text-2xl font-black mb-8">{platform}</h4>
                   
                   <ul className="space-y-4 mb-12 flex-1">
                     {platformServices.map((service) => (
-                      <li key={service._id} className="flex items-center gap-3 text-white/60 font-bold justify-center text-sm">
-                        <CheckCircle2 size={16} className="text-brand-accent opacity-50" />
+                      <li key={service._id} className="flex items-center gap-3 opacity-60 font-bold justify-center text-sm">
+                        <CheckCircle2 size={16} className="text-brand-accent" />
                         <span>{service.type}</span>
                       </li>
                     ))}
                   </ul>
 
-                  <button className="w-full py-4 rounded-3xl bg-white/10 text-white font-black text-sm hover:bg-white/20 transition-all shadow-xl">
+                  <button className="w-full py-4 rounded-3xl bg-brand-primary text-white font-black text-sm hover:scale-[1.02] transition-all shadow-xl">
                     {t('viewPackages')}
                   </button>
                 </motion.div>

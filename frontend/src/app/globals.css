@@ -21,17 +21,19 @@
   --blur-glass: 16px;
 }
 
-:root {
+.light {
   --background: #85a3e1;
   --foreground: #063188;
   --secondary: #2915c0;
   --accent: #f5ae54;
+  color-scheme: light;
 }
 
-.dark {
+.dark, .theme-glass {
   --background: #1b3069;
   --foreground: #ffffff;
   --secondary: #f5ae54;
+  color-scheme: dark;
 }
 
 @layer base {
@@ -39,7 +41,7 @@
     background-color: var(--background);
     color: var(--foreground);
     font-family: var(--font-plus-jakarta), var(--font-cairo), sans-serif;
-    @apply antialiased selection:bg-brand-secondary selection:text-white;
+    @apply antialiased selection:bg-brand-secondary selection:text-white transition-colors duration-300;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -49,39 +51,31 @@
 }
 
 @utility glassy {
-  /* Default Standard Mode (Light/Dark) - Solid/Clean Backgrounds */
+  /* Default Standard Mode (Light) - Solid/Clean White Background with Deep Blue Text */
   background: white;
   border: 1px solid rgba(0, 0, 0, 0.1);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  color: #063188;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  color: #063188 !important;
 
+  /* Standard Dark Mode - Solid Navy with White Text */
   .dark & {
     background: #1b3069;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
-    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    color: #ffffff !important;
   }
 
-  /* Glass Mode - Restore Soap Bubble Effects */
+  /* Premium Glass Mode - Soap Bubble with High Contrast White Text */
   .theme-glass & {
-    background: rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.5);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1));
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.4);
     box-shadow: 
-      0 8px 32px 0 rgba(31, 38, 135, 0.1),
-      inset 0 4px 12px rgba(255, 255, 255, 0.6),
-      inset 0 -4px 12px rgba(0, 0, 0, 0.03);
-    color: #063188;
-  }
-
-  .theme-glass.dark & {
-    background: rgba(15, 23, 42, 0.4);
-    box-shadow: 
-      0 8px 32px 0 rgba(0, 0, 0, 0.3),
-      inset 0 4px 12px rgba(255, 255, 255, 0.05),
-      inset 0 -4px 12px rgba(0, 0, 0, 0.2);
-    color: #ffffff;
+      0 10px 40px -10px rgba(0, 0, 0, 0.3),
+      inset 0 10px 20px rgba(255, 255, 255, 0.5),
+      inset 0 -10px 20px rgba(0, 0, 0, 0.05);
+    color: #ffffff !important;
   }
 }
 
@@ -127,7 +121,7 @@
     radial-gradient(at 50% 0%, hsla(225, 39%, 23%, 1) 0, transparent 50%), 
     radial-gradient(at 100% 0%, hsla(225, 39%, 30%, 1) 0, transparent 50%);
 
-  .dark & {
+  .dark &, .theme-glass & {
     background-color: #1b3069;
     background-image: 
       radial-gradient(at 0% 0%, hsla(225, 39%, 10%, 1) 0, transparent 50%), 

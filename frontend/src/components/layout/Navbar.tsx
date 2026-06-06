@@ -42,38 +42,46 @@ export default function Navbar() {
       <motion.div
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        whileHover={{ scale: 1.05 }}
+        whileHover={{ scale: 1.02 }}
         className={cn(
-          "rounded-full w-full max-w-7xl px-4 md:px-8 py-3 flex items-center justify-between transition-all duration-500 pointer-events-auto border transition-transform",
-          scrolled 
-            ? "glassy shadow-2xl bg-white/90! border-white/50" 
-            : "glassy bg-white/20 border-white/30 text-white!"
+          "rounded-full w-auto max-w-7xl px-4 md:px-10 py-3 flex items-center justify-between transition-all duration-500 pointer-events-auto border transition-transform",
+          theme === 'light'
+            ? scrolled 
+              ? "bg-white text-[#063188] border-black/5 shadow-2xl" 
+              : "bg-[#85a3e1]/10 text-[#063188] border-black/5"
+            : theme === 'dark'
+              ? scrolled
+                ? "bg-[#1b3069] text-white border-white/5 shadow-2xl"
+                : "bg-white/5 text-white border-white/5"
+              : scrolled
+                ? "glassy shadow-2xl border-white/50"
+                : "glassy bg-white/20 border-white/30 text-white!"
         )}
       >
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-3 group shrink-0 mr-2">
-          <div className="relative w-10 h-10 rounded-full overflow-hidden border-2 border-white/20 group-hover:border-white/50 transition-all">
+        <Link href="/" className="flex items-center gap-3 group shrink-0 mr-4">
+          <div className="relative w-10 h-10 rounded-full overflow-hidden border-2 border-white/20 group-hover:border-white/50 transition-all shadow-lg">
             <Image src="/logo.jpg" alt="Elevate Digital" fill className="object-cover" />
           </div>
           <span className={cn(
             "font-black text-lg xl:text-xl tracking-tight hidden lg:block whitespace-nowrap",
-            scrolled ? "text-[#063188]" : "text-white"
+            theme === 'light' ? "text-[#063188]" : "text-white"
           )}>
-            Elevate <span className={cn(scrolled ? "text-[#063188]/60" : "text-white/60")}>Digital</span>
+            Elevate <span className="opacity-60">Digital</span>
           </span>
         </Link>
 
         {/* Desktop Links */}
-        <div className="hidden lg:flex items-center justify-center gap-3 xl:gap-6 flex-1 px-2">
+        <div className="hidden lg:flex items-center justify-center gap-2 xl:gap-6 flex-1 min-w-0 px-4">
           {navLinks.map((link) => (
             <Link 
               key={link.name} 
               href={link.href}
               className={cn(
-                "text-xs xl:text-sm font-black transition-colors whitespace-nowrap",
-                scrolled 
-                  ? "text-[#063188]" 
-                  : "text-white"
+                "text-xs xl:text-sm font-bold transition-all whitespace-nowrap px-3 py-2 rounded-full hover:bg-black/5 dark:hover:bg-white/5",
+                theme === 'light' 
+                  ? "text-[#063188]/70 hover:text-[#063188]" 
+                  : "text-white/70 hover:text-white"
               )}
             >
               {link.name}
@@ -82,22 +90,22 @@ export default function Navbar() {
         </div>
 
         {/* Actions (Language, Theme, Auth) */}
-        <div className="flex items-center gap-2 xl:gap-4 shrink-0 ml-2">
+        <div className="flex items-center gap-2 xl:gap-4 shrink-0 ml-4">
           <div className="hidden sm:block">
-            <LanguageSelector scrolled={scrolled} />
+            <LanguageSelector scrolled={theme === 'light' || scrolled} />
           </div>
 
           <div className="hidden sm:block">
-            <ThemeSelector scrolled={scrolled} />
+            <ThemeSelector scrolled={theme === 'light' || scrolled} />
           </div>
 
           <Link 
             href="/auth" 
             className={cn(
-              "hidden sm:flex px-6 xl:px-8 py-2.5 rounded-full font-black text-xs xl:text-sm transition-all hover:scale-105 active:scale-95 shadow-lg whitespace-nowrap items-center justify-center",
-              scrolled
-                ? "bg-[#063188] text-white hover:shadow-[#063188]/20"
-                : "bg-white text-[#063188] hover:bg-white/90"
+              "hidden sm:flex px-6 xl:px-10 py-2.5 rounded-full font-black text-xs xl:text-sm transition-all hover:scale-105 active:scale-95 shadow-xl whitespace-nowrap items-center justify-center",
+              theme === 'light'
+                ? "bg-[#063188] text-white hover:shadow-[#063188]/30"
+                : "bg-white text-[#063188] hover:bg-white/90 shadow-white/10"
             )}
           >
             {locale === 'fr' ? 'Connexion' : locale === 'ar' ? 'دخول' : 'Login'}
@@ -107,7 +115,7 @@ export default function Navbar() {
             onClick={toggleMenu}
             className={cn(
               "lg:hidden p-2 rounded-full transition-colors",
-              scrolled ? "text-[#063188] hover:bg-[#063188]/5" : "text-white hover:bg-white/10"
+              theme === 'light' ? "text-[#063188] hover:bg-black/5" : "text-white hover:bg-white/10"
             )}
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
