@@ -11,18 +11,21 @@ Elevate Digital is a premium social media boosting platform tailored for Algeria
 - **Tech Stack**: Next.js 16 (App Router), Tailwind CSS 4, Framer Motion, Node.js (Express), MongoDB.
 
 ## UI/UX Principles
+- **Theme System**:
+  - **White Mode**: Standard light theme with solid backgrounds and high contrast blue text.
+  - **Dark Mode**: Standard dark theme with deep navy solid backgrounds and white text.
+  - **Glass Mode**: The signature "Soap Bubble" theme. Uses dark background with 3D glassmorphism and inset highlights.
 - **Color Palette (White Mode)**:
   - Background: `#85a3e1` (Soft Blue) -> Transitions to opaque white (`bg-white/90`) on scroll for Navbar.
   - Text: `#063188` (Deep Blue)
-  - Text Secondary: `#2915c0` (Vibrant Purple/Blue)
-- **Glassmorphism**:
-  - Global `glassy` utility uses `30%` background opacity with `12px` blur for a premium frosted look.
-  - On hover, interactive glassy elements (like Navbar) should scale up (`scale-105`).
-- **Contrast Mandate**: NEVER use white text on light glassy backgrounds. Always use `#063188` (Deep Blue) for text on light bubbles.
+- **Color Palette (Dark & Glass Mode)**:
+  - Background: `#1b3069` (Dark Navy)
+  - Text: `#FFFFFF` (White)
+- **Glassmorphism (Glass Mode Only)**:
+  - Signature `glassy` utility uses `30%` background opacity with `12px` blur and soap bubble inset highlights.
 - **Interactions**:
-  - **Navbar**: Scales up on hover; switches to solid Deep Blue text on scroll.
-  - **Inputs**: High-contrast bubbly shapes (`bg-white/40` in Auth) with solid borders.
-  - **Auth**: High-opacity containers (`bg-white/50`) for clear readability.
+  - **Navbar**: Scales up on hover; switches background/text based on the active theme.
+  - **Theme Select**: Premium dropdown to switch between White, Dark, and Glass modes.
 
 ## Custom Tailwind Utilities (Tailwind 4 @utility)
 - `.glassy`: Frosted glass with soap bubble inset highlights (`inset 0 4px 12px rgba(255,255,255,0.6)`).

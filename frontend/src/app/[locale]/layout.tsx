@@ -5,6 +5,7 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, setRequestLocale } from 'next-intl/server';
 import ConditionalNavbar from "@/components/layout/ConditionalNavbar";
 import { AuthProvider } from "@/context/AuthContext";
+import { ThemeProvider } from "@/context/ThemeContext";
 
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -39,8 +40,10 @@ export default async function RootLayout({
       <body className={`${plusJakarta.variable} ${cairo.variable} font-sans antialiased overflow-x-hidden`}>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <AuthProvider>
-            <ConditionalNavbar />
-            {children}
+            <ThemeProvider>
+              <ConditionalNavbar />
+              {children}
+            </ThemeProvider>
           </AuthProvider>
         </NextIntlClientProvider>
       </body>

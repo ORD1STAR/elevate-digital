@@ -8,11 +8,13 @@ import { Menu, X, Sun, Moon } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useTranslations, useLocale } from 'next-intl';
 import LanguageSelector from './LanguageSelector';
+import ThemeSelector from './ThemeSelector';
+import { useTheme } from '@/context/ThemeContext';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [isDark, setIsDark] = useState(false);
+  const { theme } = useTheme();
   const t = useTranslations('Navbar');
   const locale = useLocale();
 
@@ -33,10 +35,7 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const toggleTheme = () => {
-    setIsDark(!isDark);
-    document.documentElement.classList.toggle('dark');
-  };
+  const toggleMenu = () => setIsOpen(!isOpen);
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-6 px-4 pointer-events-none">
@@ -88,18 +87,9 @@ export default function Navbar() {
             <LanguageSelector scrolled={scrolled} />
           </div>
 
-          {/* Theme Switcher */}
-          <button 
-            onClick={toggleTheme}
-            className={cn(
-              "w-10 h-10 rounded-full flex items-center justify-center transition-all border shrink-0",
-              scrolled 
-                ? "bg-[#063188]/5 border-[#063188]/10" 
-                : "bg-white/10 hover:bg-white/20 border-white/20"
-            )}
-          >
-            {isDark ? <Sun size={18} className="text-brand-accent" /> : <Moon size={18} className={cn(scrolled ? "text-[#063188]" : "text-white")} />}
-          </button>
+          <div className="hidden sm:block">
+            <ThemeSelector scrolled={scrolled} />
+          </div>
 
           <Link 
             href="/auth" 
@@ -114,10 +104,10 @@ export default function Navbar() {
           </Link>
 
           <button 
-            onClick={() => setIsOpen(!isOpen)}
+            onClick={toggleMenu}
             className={cn(
               "lg:hidden p-2 rounded-full transition-colors",
-              scrolled && !isDark ? "text-[#063188] hover:bg-[#063188]/5" : "text-white hover:bg-white/10"
+              scrolled ? "text-[#063188] hover:bg-[#063188]/5" : "text-white hover:bg-white/10"
             )}
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -148,6 +138,7 @@ export default function Navbar() {
             <div className="flex items-center justify-between pt-4 border-t border-white/10">
               <div className="flex gap-2">
                 <LanguageSelector />
+                <ThemeSelector />
               </div>
             </div>
 

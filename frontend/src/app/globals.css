@@ -49,20 +49,34 @@
 }
 
 @utility glassy {
-  background: rgba(255, 255, 255, 0.3);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  /* Soap Bubble Effect */
-  box-shadow: 
-    0 8px 32px 0 rgba(31, 38, 135, 0.1),
-    inset 0 4px 12px rgba(255, 255, 255, 0.6),
-    inset 0 -4px 12px rgba(0, 0, 0, 0.03);
+  /* Default Standard Mode (Light/Dark) - Solid/Clean Backgrounds */
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
   color: #063188;
 
   .dark & {
+    background: #1b3069;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+    color: #ffffff;
+  }
+
+  /* Glass Mode - Restore Soap Bubble Effects */
+  .theme-glass & {
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 
+      0 8px 32px 0 rgba(31, 38, 135, 0.1),
+      inset 0 4px 12px rgba(255, 255, 255, 0.6),
+      inset 0 -4px 12px rgba(0, 0, 0, 0.03);
+    color: #063188;
+  }
+
+  .theme-glass.dark & {
     background: rgba(15, 23, 42, 0.4);
-    border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 
       0 8px 32px 0 rgba(0, 0, 0, 0.3),
       inset 0 4px 12px rgba(255, 255, 255, 0.05),
