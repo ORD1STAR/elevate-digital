@@ -1,0 +1,9 @@
+node_modules/
+.next/
+.env
+.env.*
+!.env.example
+.qodo/
+.claude/
+*.log
+.DS_Store
